@@ -8,634 +8,541 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
+  --blue: #00a7e1;
+  --blue-d: #0087b8;
+  --blue-bg: rgba(0,167,225,0.08);
+  --blue-border: rgba(0,167,225,0.2);
   --red: #e8440a;
-  --red-dark: #c93a09;
-  --text: #111827;
-  --text-2: #374151;
-  --text-3: #6b7280;
-  --text-4: #9ca3af;
-  --border: #e5e7eb;
+  --ink: #0d1f2d;
+  --ink-2: #2d4a5e;
+  --ink-3: #5a7a8f;
+  --ink-4: #8fa8b8;
+  --rule: #e2eaf0;
   --bg: #ffffff;
-  --bg-2: #f9fafb;
-  --bg-3: #f3f4f6;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-  --shadow: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -1px rgba(0,0,0,.04);
-  --shadow-md: 0 10px 15px -3px rgba(0,0,0,.07), 0 4px 6px -2px rgba(0,0,0,.04);
-  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,.08), 0 10px 10px -5px rgba(0,0,0,.04);
-  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,.12);
+  --bg-2: #f7fafc;
+  --bg-3: #eef3f7;
   --r: 10px;
   --r-lg: 16px;
+  --shadow: 0 4px 16px rgba(13,31,45,.08);
+  --shadow-lg: 0 16px 48px rgba(13,31,45,.12);
+  --shadow-xl: 0 24px 64px rgba(13,31,45,.16);
 }
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body { font-family:'Inter',system-ui,sans-serif; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; }
-img { display:block; max-width:100%; }
-a { text-decoration:none; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;}
 
-/* ═══════════════════════════════════
-   HERO — full-bleed background image
-   Nav floats OVER this
-═══════════════════════════════════ */
-.hero-section {
-  position: relative;
-  min-height: 580px;
-  background: url('https://www.mannhart-ag.ch/fileadmin/documents/Viessmann_WP.jpeg') center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
+/* ── FLOATING NAV CARD ──────────────────────── */
+.nav-outer{
+  position:absolute;top:24px;left:0;right:0;
+  padding:0 40px;z-index:100;
 }
-
-/* teal/illustrated feel overlay — matches the mannhart-ag.ch teal hero */
-.hero-section::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(40,130,145,0.82) 0%, rgba(20,90,110,0.75) 60%, rgba(15,60,80,0.5) 100%);
-  z-index: 0;
+.nav-card{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(255,255,255,0.8);
+  border-radius:20px;
+  box-shadow:0 8px 40px rgba(13,31,45,.18);
+  display:flex;align-items:center;
+  padding:14px 32px;gap:0;
 }
-
-/* ═══════════════════════════════════
-   FLOATING NAV CARD — the key element
-═══════════════════════════════════ */
-.nav-wrap {
-  position: relative;
-  z-index: 10;
-  padding: 28px 40px 0;
+.nav-logo{
+  display:flex;align-items:center;
+  flex-shrink:0;margin-right:40px;padding-right:36px;
+  border-right:1px solid var(--rule);
 }
-
-.nav-card {
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: center;
-  padding: 16px 36px;
-  gap: 0;
+.nav-logo img{height:44px;width:auto;}
+.nav-links{
+  display:flex;align-items:center;gap:0;flex:1;
+  justify-content:space-evenly;
+}
+.nav-link{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:9px 20px;border-radius:9px;cursor:pointer;
+  color:var(--ink-2);transition:background .15s,color .15s;
+}
+.nav-link:hover{background:var(--bg-2);color:var(--blue);}
+.nav-link svg{width:20px;height:20px;flex-shrink:0;}
+.nav-link span{
+  font-size:10.5px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;
 }
 
-/* Logo — large, left side */
-.nav-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-shrink: 0;
-  margin-right: 48px;
-  padding-right: 48px;
-  border-right: 1px solid rgba(0,0,0,0.08);
+/* ── HERO ──────────────────────────────────── */
+.hero{
+  position:relative;min-height:640px;
+  background:url('https://www.mannhart-ag.ch/fileadmin/documents/Viessmann_WP.jpeg') center/cover no-repeat;
+  display:flex;flex-direction:column;
+  overflow:hidden;
 }
-.nav-logo img {
-  height: 48px;
-  width: auto;
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(110deg, rgba(0,28,48,.82) 0%, rgba(0,50,80,.70) 55%, rgba(0,80,110,.45) 100%);
+  z-index:0;
 }
-
-/* Nav items — icon above text, spaced evenly */
-.nav-items {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  flex: 1;
-  justify-content: space-around;
+.hero-body{
+  position:relative;z-index:5;
+  flex:1;display:flex;align-items:center;
+  padding:120px 80px 72px;gap:48px;
 }
 
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 22px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.15s;
-  text-decoration: none;
-  color: var(--text);
+/* left text */
+.hero-left{flex:1;max-width:520px;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:700;color:rgba(255,255,255,.55);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;
 }
-.nav-item:hover {
-  background: rgba(0,0,0,0.05);
+.hero-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);}
+.hero h1{
+  font-size:50px;font-weight:800;
+  color:#fff;line-height:1.1;letter-spacing:-.03em;
+  margin-bottom:18px;
 }
-.nav-item.active {
-  background: rgba(232,68,10,0.08);
-  color: var(--red);
+.hero-desc{
+  font-size:16px;color:rgba(255,255,255,.65);
+  line-height:1.75;margin-bottom:28px;max-width:420px;
+}
+.hero-cta-row{display:flex;gap:12px;align-items:center;margin-bottom:40px;}
+.btn-blue{
+  background:var(--blue);color:#fff;
+  padding:12px 24px;border-radius:8px;
+  font-size:14px;font-weight:700;
+  transition:background .15s;display:inline-block;
+  border:none;cursor:pointer;font-family:inherit;
+}
+.btn-blue:hover{background:var(--blue-d);}
+.btn-ghost-w{
+  color:rgba(255,255,255,.7);font-size:14px;font-weight:500;
+  display:inline-flex;align-items:center;gap:5px;
+  transition:color .15s;
+}
+.btn-ghost-w:hover{color:#fff;}
+.btn-ghost-w svg{transition:transform .2s;}
+.btn-ghost-w:hover svg{transform:translateX(3px);}
+.hero-stats{display:flex;gap:28px;}
+.hstat{border-left:2px solid rgba(255,255,255,.15);padding-left:16px;}
+.hstat strong{display:block;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1;}
+.hstat span{font-size:12px;color:rgba(255,255,255,.5);font-weight:500;}
+
+/* right form panel */
+.hero-form-panel{
+  flex:0 0 380px;
+  background:rgba(255,255,255,0.97);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-xl);
+  padding:32px;
+  border:1px solid rgba(255,255,255,0.9);
+}
+.hfp-head{margin-bottom:22px;}
+.hfp-tag{
+  display:inline-block;
+  background:var(--blue-bg);border:1px solid var(--blue-border);
+  color:var(--blue);border-radius:20px;
+  padding:3px 12px;font-size:11px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;
+}
+.hfp-head h3{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:4px;}
+.hfp-head p{font-size:13px;color:var(--ink-3);}
+.hfg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.hfg label{font-size:11px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;}
+.hfg input,.hfg select,.hfg textarea{
+  border:1.5px solid var(--rule);border-radius:8px;
+  padding:9px 12px;font-size:13.5px;
+  font-family:inherit;color:var(--ink);background:var(--bg);
+  transition:border-color .15s,box-shadow .15s;outline:none;width:100%;
+}
+.hfg input:focus,.hfg select:focus,.hfg textarea:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,167,225,.1);
+}
+.hfg textarea{min-height:70px;resize:vertical;}
+.hfp-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.hfp-submit{
+  width:100%;background:var(--blue);color:#fff;
+  border:none;padding:12px;border-radius:8px;
+  font-size:14.5px;font-weight:700;font-family:inherit;
+  cursor:pointer;transition:background .15s;margin-top:4px;
+}
+.hfp-submit:hover{background:var(--blue-d);}
+.hfp-note{
+  text-align:center;font-size:11.5px;
+  color:var(--ink-4);margin-top:10px;
 }
 
-.nav-item-icon {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text);
+/* ── INFO STRIP ──────────────────────────── */
+.infostrip{
+  background:var(--ink);padding:12px 80px;
+  display:flex;gap:28px;align-items:center;
 }
-.nav-item:hover .nav-item-icon,
-.nav-item.active .nav-item-icon { color: var(--red); }
+.ii{display:flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(255,255,255,.5);}
+.ii svg{opacity:.6;flex-shrink:0;}
+.ii strong{color:rgba(255,255,255,.85);font-weight:500;}
+.ii-sep{flex:1;}
 
-.nav-item-label {
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: inherit;
+/* ── SHARED SECTION STYLES ──────────────── */
+section{padding:80px 80px;}
+.section-inner{max-width:1280px;margin:0 auto;}
+.section-alt{background:var(--bg-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:700;color:var(--blue);
+  letter-spacing:.09em;text-transform:uppercase;margin-bottom:12px;
 }
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+h2.st{font-size:34px;font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1.15;margin-bottom:8px;}
+p.sd{font-size:15.5px;color:var(--ink-3);line-height:1.7;max-width:520px;}
+.sh{margin-bottom:44px;}
+.sh-c{text-align:center;}
+.sh-c .sd{margin:0 auto;}
 
-/* ═══════════════════════════════════
-   HERO CONTENT — below the nav card
-═══════════════════════════════════ */
-.hero-content {
-  position: relative;
-  z-index: 5;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 52px 80px 72px;
-  gap: 60px;
+/* ── TRUST STRIP ────────────────────────── */
+.trust{
+  background:var(--bg-2);border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:22px 80px;display:flex;gap:0;align-items:stretch;
 }
-.hero-text { max-width: 520px; }
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px; font-weight: 600;
-  color: rgba(255,255,255,0.7);
-  letter-spacing: 0.1em; text-transform: uppercase;
-  margin-bottom: 18px;
+.ti{
+  flex:1;display:flex;align-items:center;gap:12px;
+  padding:0 24px;border-right:1px solid var(--rule);
 }
-.hero-eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.7); }
-.hero h1 {
-  font-size: 48px; font-weight: 800;
-  line-height: 1.12; letter-spacing: -0.03em;
-  color: #fff; margin-bottom: 18px;
+.ti:first-child{padding-left:0;}
+.ti:last-child{border-right:none;}
+.ti-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--bg);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
-.hero-sub {
-  font-size: 16.5px; color: rgba(255,255,255,0.8);
-  line-height: 1.7; margin-bottom: 32px;
+.ti-icon svg{width:16px;height:16px;color:var(--blue);}
+.ti-text strong{display:block;font-size:13px;font-weight:700;color:var(--ink);}
+.ti-text span{font-size:12px;color:var(--ink-3);}
+
+/* ── SERVICE CARDS ──────────────────────── */
+.scards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;
 }
-.hero-btns { display:flex; gap:12px; align-items:center; }
-.btn-white {
-  background: #fff; color: var(--text);
-  padding: 13px 26px; border-radius: 8px;
-  font-size: 14.5px; font-weight: 700;
-  transition: opacity .15s;
-  display: inline-block;
+.scard{background:var(--bg);transition:background .15s;}
+.scard:hover{background:var(--bg-2);}
+.scard-img{height:190px;overflow:hidden;}
+.scard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.scard:hover .scard-img img{transform:scale(1.04);}
+.scard-body{padding:24px 26px 28px;}
+.scard-tag{
+  display:inline-block;background:var(--blue-bg);border:1px solid var(--blue-border);
+  color:var(--blue);border-radius:20px;padding:2px 10px;
+  font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px;
 }
-.btn-white:hover { opacity: 0.9; }
-.btn-outline-white {
-  color: rgba(255,255,255,0.9);
-  font-size: 14.5px; font-weight: 500;
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 13px 4px;
-  transition: color .15s;
+.scard h3{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em;}
+.scard p{font-size:13.5px;color:var(--ink-3);line-height:1.7;margin-bottom:16px;}
+.scard-link{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:13px;font-weight:700;color:var(--blue);transition:gap .2s;
 }
-.btn-outline-white:hover { color: #fff; }
-.btn-outline-white svg { transition: transform .2s; }
-.btn-outline-white:hover svg { transform: translateX(3px); }
+.scard-link svg{width:13px;height:13px;transition:transform .2s;}
+.scard-link:hover svg{transform:translateX(3px);}
 
-.hero-stats {
-  display: flex; flex-direction: column; gap: 20px;
-  margin-left: auto;
-}
-.hero-stat-card {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 12px;
-  padding: 18px 24px;
-  min-width: 140px;
-  text-align: center;
-}
-.hero-stat-card strong {
-  display: block; font-size: 32px;
-  font-weight: 800; color: #fff;
-  letter-spacing: -0.03em; line-height: 1;
-  margin-bottom: 4px;
-}
-.hero-stat-card span { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; }
+/* ── ABOUT ──────────────────────────────── */
+.about-row{display:flex;gap:72px;align-items:center;}
+.about-txt{flex:1;}
+.about-img{flex:0 0 440px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/3;}
+.about-img img{width:100%;height:100%;object-fit:cover;}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:11px;margin:22px 0 30px;}
+.checklist li{display:flex;align-items:flex-start;gap:11px;font-size:14.5px;color:var(--ink-2);line-height:1.6;}
+.chk{width:19px;height:19px;border-radius:5px;background:var(--blue-bg);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.chk svg{width:10px;height:10px;color:var(--blue);}
+.anums{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;margin-top:24px;}
+.anum{background:var(--bg-2);padding:18px 20px;}
+.anum strong{display:block;font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1;margin-bottom:2px;}
+.anum span{font-size:12px;color:var(--ink-3);}
 
-/* ═══════════════════════════════════
-   REST OF PAGE
-═══════════════════════════════════ */
+/* ── REFERENCES ─────────────────────────── */
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;}
+.rcard{background:var(--bg);}
+.rcard:hover{background:var(--bg-2);}
+.rcard-img{height:160px;overflow:hidden;}
+.rcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.rcard:hover .rcard-img img{transform:scale(1.04);}
+.rcard-body{padding:16px 18px 20px;}
+.rcard-cat{font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;}
+.rcard h3{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em;}
+.rcard p{font-size:12.5px;color:var(--ink-3);line-height:1.6;}
 
-/* info strip */
-.infostrip {
-  background: var(--text);
-  padding: 12px 64px;
-  display: flex; gap: 32px; align-items: center;
-}
-.infoitem { display:flex; align-items:center; gap:8px; font-size:12.5px; color:rgba(255,255,255,0.6); }
-.infoitem svg { opacity:.7; flex-shrink:0; }
-.infoitem strong { color:rgba(255,255,255,0.9); font-weight:500; }
-.infoitem-sep { flex:1; }
+/* ── TESTIMONIALS ───────────────────────── */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
+.tcard{background:var(--bg);border:1px solid var(--rule);border-radius:var(--r-lg);padding:26px;box-shadow:0 2px 8px rgba(13,31,45,.04);}
+.tstars{font-size:13px;letter-spacing:2px;margin-bottom:12px;color:var(--blue);}
+.tcard blockquote{font-size:13.5px;color:var(--ink-2);line-height:1.75;font-style:italic;margin-bottom:18px;}
+.tauthor{display:flex;align-items:center;gap:10px;}
+.tavatar{width:34px;height:34px;border-radius:50%;background:var(--blue-bg);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;color:var(--blue);flex-shrink:0;}
+.tname strong{display:block;font-size:13px;font-weight:700;color:var(--ink);}
+.tname span{font-size:11.5px;color:var(--ink-4);}
 
-/* sections */
-.section { padding: 80px 64px; max-width: 1400px; margin: 0 auto; }
-.section-sep { border-top: 1px solid var(--border); }
-.section-alt { background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+/* ── AREA ───────────────────────────────── */
+.area-row{display:flex;gap:72px;align-items:center;}
+.area-txt{flex:1;}
+.area-img{flex:0 0 440px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:16/10;}
+.area-img img{width:100%;height:100%;object-fit:cover;}
+.rlist{display:flex;flex-direction:column;gap:2px;margin:20px 0 28px;}
+.rrow{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:7px;font-size:13.5px;transition:background .15s;}
+.rrow:hover{background:var(--bg-2);}
+.rrow-l{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-weight:500;}
+.rdot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+.rbadge{font-size:10px;font-weight:700;color:var(--ink-3);background:var(--bg-3);border:1px solid var(--rule);padding:2px 9px;border-radius:20px;}
 
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11.5px; font-weight: 600;
-  color: var(--red); letter-spacing: 0.09em;
-  text-transform: uppercase; margin-bottom: 14px;
-}
-.eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--red); flex-shrink:0; }
-h2.stitle { font-size:36px; font-weight:800; letter-spacing:-0.03em; color:var(--text); line-height:1.15; margin-bottom:10px; }
-p.sdesc { font-size:16px; color:var(--text-3); line-height:1.7; max-width:560px; }
-.sec-center { text-align:center; }
-.sec-center p.sdesc { margin:0 auto; }
-
-/* service cards */
-.scards { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; margin-top:44px; }
-.scard { background:var(--bg); transition:background .15s; }
-.scard:hover { background:var(--bg-2); }
-.scard-img { height:196px; overflow:hidden; }
-.scard-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
-.scard:hover .scard-img img { transform:scale(1.04); }
-.scard-body { padding:26px 28px 30px; }
-.scard-tag { font-size:10.5px; font-weight:600; color:var(--red); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
-.scard h3 { font-size:18px; font-weight:700; color:var(--text); margin-bottom:8px; letter-spacing:-.02em; }
-.scard p { font-size:13.5px; color:var(--text-3); line-height:1.7; margin-bottom:18px; }
-.scard-link { display:inline-flex; align-items:center; gap:5px; font-size:13.5px; font-weight:600; color:var(--text-2); transition:color .15s; }
-.scard-link svg { transition:transform .2s; }
-.scard-link:hover { color:var(--red); }
-.scard-link:hover svg { transform:translateX(3px); }
-
-/* about */
-.about-row { display:flex; gap:72px; align-items:center; }
-.about-text { flex:1; }
-.about-img { flex:0 0 460px; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-xl); aspect-ratio:4/3; }
-.about-img img { width:100%; height:100%; object-fit:cover; }
-.checklist { list-style:none; display:flex; flex-direction:column; gap:12px; margin:24px 0 32px; }
-.checklist li { display:flex; align-items:flex-start; gap:12px; font-size:14.5px; color:var(--text-2); line-height:1.6; }
-.chk { width:20px; height:20px; border-radius:5px; background:var(--bg-2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
-.chk svg { width:11px; height:11px; color:var(--red); }
-.anums { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; margin-top:28px; }
-.anum { background:var(--bg-2); padding:20px 22px; }
-.anum strong { display:block; font-size:27px; font-weight:800; color:var(--text); letter-spacing:-.03em; line-height:1; margin-bottom:3px; }
-.anum span { font-size:12.5px; color:var(--text-3); }
-
-/* ref grid */
-.rgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; margin-top:44px; }
-.rcard { background:var(--bg); }
-.rcard-img { height:158px; overflow:hidden; }
-.rcard-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
-.rcard:hover .rcard-img img { transform:scale(1.04); }
-.rcard-body { padding:18px 20px 22px; }
-.rcard-cat { font-size:10.5px; font-weight:600; color:var(--red); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
-.rcard h3 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:5px; letter-spacing:-.01em; }
-.rcard p { font-size:12.5px; color:var(--text-3); line-height:1.65; }
-
-/* testimonials */
-.tgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:44px; }
-.tcard { background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg); padding:28px; box-shadow:var(--shadow-sm); }
-.tstars { color:#f59e0b; font-size:13px; letter-spacing:2px; margin-bottom:14px; }
-.tcard blockquote { font-size:14px; color:var(--text-2); line-height:1.75; font-style:italic; margin-bottom:20px; }
-.tauthor { display:flex; align-items:center; gap:11px; }
-.tavatar { width:36px; height:36px; border-radius:50%; background:var(--bg-3); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--text-2); flex-shrink:0; }
-.tauthor-name strong { display:block; font-size:13px; font-weight:600; color:var(--text); }
-.tauthor-name span { font-size:12px; color:var(--text-4); }
-
-/* area */
-.area-row { display:flex; gap:72px; align-items:center; }
-.area-text { flex:1; }
-.area-img { flex:0 0 460px; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-xl); aspect-ratio:16/10; }
-.area-img img { width:100%; height:100%; object-fit:cover; }
-.rlist { display:flex; flex-direction:column; gap:2px; margin:22px 0 32px; }
-.rrow { display:flex; align-items:center; justify-content:space-between; padding:11px 14px; border-radius:8px; font-size:13.5px; transition:background .15s; }
-.rrow:hover { background:var(--bg-2); }
-.rrow-name { display:flex; align-items:center; gap:9px; color:var(--text-2); font-weight:500; }
-.rdot { width:7px; height:7px; border-radius:50%; background:var(--red); flex-shrink:0; }
-.rbadge { font-size:10.5px; font-weight:600; color:var(--text-3); background:var(--bg-3); border:1px solid var(--border); padding:2px 9px; border-radius:20px; }
-
-/* trust strip */
-.trust-row { background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:26px 64px; display:flex; gap:0; align-items:stretch; max-width:100%; }
-.titem { flex:1; display:flex; align-items:center; gap:13px; padding:0 28px; border-right:1px solid var(--border); }
-.titem:first-child { padding-left:0; }
-.titem:last-child { border-right:none; }
-.titem-icon { width:38px; height:38px; border-radius:9px; background:var(--bg); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.titem-icon svg { width:17px; height:17px; color:var(--red); }
-.titem-text strong { display:block; font-size:13px; font-weight:600; color:var(--text); }
-.titem-text span { font-size:12px; color:var(--text-3); }
-
-/* contact */
-.contact-grid { display:grid; grid-template-columns:1fr 400px; gap:72px; align-items:start; }
-.contact-text p { font-size:15.5px; color:var(--text-3); line-height:1.75; margin:14px 0 32px; max-width:460px; }
-.citems { display:flex; flex-direction:column; gap:2px; }
-.citem { display:flex; align-items:center; gap:14px; padding:14px; border-radius:9px; transition:background .15s; }
-.citem:hover { background:var(--bg-2); }
-.citem-icon { width:38px; height:38px; border-radius:9px; background:var(--bg-2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.citem-icon svg { width:16px; height:16px; color:var(--text-2); }
-.citem-text strong { display:block; font-size:12px; font-weight:600; color:var(--text-3); }
-.citem-text span { font-size:14px; color:var(--text); font-weight:500; }
-.cform { background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg); padding:34px; box-shadow:var(--shadow-md); }
-.cform h3 { font-size:19px; font-weight:700; color:var(--text); margin-bottom:6px; letter-spacing:-.02em; }
-.cform > p { font-size:13.5px; color:var(--text-3); margin-bottom:24px; }
-.frow { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.fg { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
-.fg label { font-size:11.5px; font-weight:600; color:var(--text-3); text-transform:uppercase; letter-spacing:.05em; }
-.fg input,.fg textarea,.fg select { border:1px solid var(--border); border-radius:7px; padding:10px 12px; font-size:13.5px; font-family:inherit; color:var(--text); background:var(--bg); transition:border-color .15s,box-shadow .15s; outline:none; width:100%; }
-.fg input:focus,.fg textarea:focus,.fg select:focus { border-color:var(--text); box-shadow:0 0 0 3px rgba(17,24,39,.06); }
-.fg textarea { min-height:90px; resize:vertical; }
-.fbtn { width:100%; background:var(--red); color:#fff; border:none; padding:12px; border-radius:8px; font-size:14.5px; font-weight:600; font-family:inherit; cursor:pointer; transition:background .15s; margin-top:2px; }
-.fbtn:hover { background:var(--red-dark); }
-
-/* footer */
-footer { background:var(--text); }
-.footer-inner { max-width:1400px; margin:0 auto; padding:56px 64px 28px; }
-.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:44px; margin-bottom:44px; }
-.fbrand p { font-size:13px; color:rgba(255,255,255,.4); line-height:1.7; margin:14px 0 0; max-width:250px; }
-.fcol h4 { font-size:10.5px; font-weight:600; color:rgba(255,255,255,.3); text-transform:uppercase; letter-spacing:.09em; margin-bottom:14px; }
-.fcol ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
-.fcol ul a { font-size:13px; color:rgba(255,255,255,.5); transition:color .15s; }
-.fcol ul a:hover { color:#fff; }
-.footer-bot { border-top:1px solid rgba(255,255,255,.07); padding-top:22px; display:flex; justify-content:space-between; align-items:center; }
-.footer-bot span { font-size:12px; color:rgba(255,255,255,.25); }
-
-/* button helpers */
-.btn-red { background:var(--red); color:#fff; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:600; display:inline-block; transition:background .15s; }
-.btn-red:hover { background:var(--red-dark); }
+/* ── FOOTER ─────────────────────────────── */
+footer{background:var(--ink);}
+.footer-in{max-width:1280px;margin:0 auto;padding:52px 80px 28px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:40px;}
+.fb p{font-size:13px;color:rgba(255,255,255,.35);line-height:1.7;margin:14px 0 0;max-width:240px;}
+.fc h4{font-size:10px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.fc ul a{font-size:13px;color:rgba(255,255,255,.45);transition:color .15s;}
+.fc ul a:hover{color:#fff;}
+.footer-bot{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;}
+.footer-bot span{font-size:11.5px;color:rgba(255,255,255,.22);}
 </style>
 </head><body>
 
-<!-- ═══════════ HERO WITH FLOATING NAV ═══════════ -->
-<div class="hero-section">
-
-  <!-- FLOATING NAV CARD -->
-  <div class="nav-wrap">
-    <div class="nav-card">
-
-      <!-- Large Logo -->
-      <a href="#" class="nav-logo">
-        <img src="https://www.mannhart-ag.ch/resources/Public/Images/logo_mannhart.svg" alt="Mannhart Gebäudetechnik AG">
+<!-- FLOATING NAV CARD -->
+<div class="nav-outer">
+  <div class="nav-card">
+    <a href="#" class="nav-logo">
+      <img src="https://www.mannhart-ag.ch/resources/Public/Images/logo_mannhart.svg" alt="Mannhart Gebäudetechnik AG">
+    </a>
+    <nav class="nav-links">
+      <a href="#leistungen" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C12 2 9 6 9 10c0 1.5.5 2.8 1.3 3.8C9.5 13.1 9 12 9 12s-2 2-2 4c0 2.8 2.2 5 5 5s5-2.2 5-5c0-4-3-7-5-7 1 1.5 1.2 3 .7 4.5C11.5 11.5 12 8 12 2z"/></svg>
+        <span>Wärme</span>
       </a>
-
-      <!-- Nav Items with Icons -->
-      <div class="nav-items">
-
-        <a href="#leistungen" class="nav-item">
-          <span class="nav-item-icon">
-            <!-- flame / Wärme -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C12 2 9 6 9 10c0 1.5.5 2.8 1.3 3.8C9.5 13.1 9 12 9 12s-2 2-2 4c0 2.8 2.2 5 5 5s5-2.2 5-5c0-4-3-7-5-7 1 1.5 1.2 3 .7 4.5C11.5 11.5 12 8 12 2z"/></svg>
-          </span>
-          <span class="nav-item-label">Wärme</span>
-        </a>
-
-        <a href="#leistungen" class="nav-item">
-          <span class="nav-item-icon">
-            <!-- water drop -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L5.5 10.5C4 12.5 4 14 4 14.5a8 8 0 0016 0c0-.5 0-2-1.5-4L12 2z"/></svg>
-          </span>
-          <span class="nav-item-label">Wasser</span>
-        </a>
-
-        <a href="#leistungen" class="nav-item">
-          <span class="nav-item-icon">
-            <!-- snowflake / Luft -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/></svg>
-          </span>
-          <span class="nav-item-label">Luft</span>
-        </a>
-
-        <a href="#ueber" class="nav-item">
-          <span class="nav-item-icon">
-            <!-- people / Unternehmen -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-          </span>
-          <span class="nav-item-label">Unternehmen</span>
-        </a>
-
-        <a href="#kontakt" class="nav-item">
-          <span class="nav-item-icon">
-            <!-- phone -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          </span>
-          <span class="nav-item-label">Kontakt</span>
-        </a>
-
-      </div>
-    </div>
+      <a href="#leistungen" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L5.5 10.5C4 12.5 4 14 4 14.5a8 8 0 0016 0c0-.5 0-2-1.5-4L12 2z"/></svg>
+        <span>Wasser</span>
+      </a>
+      <a href="#leistungen" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/></svg>
+        <span>Luft</span>
+      </a>
+      <a href="#ueber" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span>Unternehmen</span>
+      </a>
+      <a href="#referenzen" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Referenzen</span>
+      </a>
+    </nav>
   </div>
+</div>
 
-  <!-- HERO TEXT CONTENT -->
-  <div class="hero-content">
-    <div class="hero-text">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-dot"></span>
-        Gebäudetechnik seit 1986
-      </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+
+    <!-- LEFT: headline + stats -->
+    <div class="hero-left">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Gebäudetechnik seit 1986</div>
       <h1>Persönlich,<br>flexibel und<br>kompetent.</h1>
-      <p class="hero-sub">Bei Mannhart Gebäudetechnik stehen Sie als Kunde im Mittelpunkt. Verlassen Sie sich auf unser breites Fachwissen rund um Ihr Haus.</p>
-      <div class="hero-btns">
-        <a href="#kontakt" class="btn-white">Beratung anfragen</a>
-        <a href="#leistungen" class="btn-outline-white">
+      <p class="hero-desc">Bei Mannhart Gebäudetechnik stehen Sie als Kunde im Mittelpunkt. Verlassen Sie sich auf unser breites Fachwissen rund um Ihr Haus.</p>
+      <div class="hero-cta-row">
+        <a href="#leistungen" class="btn-ghost-w">
           Leistungen entdecken
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
+      <div class="hero-stats">
+        <div class="hstat"><strong>38+</strong><span>Jahre Erfahrung</span></div>
+        <div class="hstat"><strong>2000+</strong><span>Projekte</span></div>
+        <div class="hstat"><strong>15+</strong><span>Spezialisten</span></div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat-card"><strong>38+</strong><span>Jahre Erfahrung</span></div>
-      <div class="hero-stat-card"><strong>2000+</strong><span>Projekte realisiert</span></div>
-      <div class="hero-stat-card"><strong>15+</strong><span>Fachspezialisten</span></div>
-    </div>
-  </div>
 
-</div><!-- end hero-section -->
+    <!-- RIGHT: contact form panel -->
+    <div class="hero-form-panel">
+      <div class="hfp-head">
+        <div class="hfp-tag">Kostenlose Beratung</div>
+        <h3>Jetzt Anfrage senden</h3>
+        <p>Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+      </div>
+      <div class="hfp-row">
+        <div class="hfg"><label>Vorname</label><input type="text" placeholder="Max"></div>
+        <div class="hfg"><label>Nachname</label><input type="text" placeholder="Muster"></div>
+      </div>
+      <div class="hfg"><label>E-Mail</label><input type="email" placeholder="max@muster.ch"></div>
+      <div class="hfg"><label>Telefon</label><input type="tel" placeholder="+41 ..."></div>
+      <div class="hfg">
+        <label>Leistung</label>
+        <select>
+          <option value="">Bitte wählen...</option>
+          <option>Wärmetechnik / Heizung</option>
+          <option>Sanitärtechnik</option>
+          <option>Lüftungstechnik</option>
+          <option>Solarenergie</option>
+          <option>Sonstiges</option>
+        </select>
+      </div>
+      <div class="hfg"><label>Nachricht</label><textarea placeholder="Beschreiben Sie Ihr Anliegen..."></textarea></div>
+      <button class="hfp-submit">Anfrage absenden</button>
+      <p class="hfp-note">Unverbindlich &amp; kostenlos · Datenschutz gewährleistet</p>
+    </div>
+
+  </div>
+</div>
 
 <!-- INFO STRIP -->
 <div class="infostrip">
-  <div class="infoitem">
-    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-1.07-4.6A2 2 0 013.98 2.72h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-    <strong>+41 71 780 09 09</strong>
-  </div>
-  <div class="infoitem">
-    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    info@mannhart-ag.ch
-  </div>
-  <div class="infoitem">
-    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    Industrie Strasse 3, 9404 Rorschacherberg
-  </div>
-  <div class="infoitem-sep"></div>
-  <div class="infoitem">
-    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    Mo–Fr <strong>07:00–17:00</strong>
-  </div>
+  <div class="ii"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 012 4.9 2 2 0 013.98 2.72h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><strong>+41 71 780 09 09</strong></div>
+  <div class="ii"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@mannhart-ag.ch</div>
+  <div class="ii"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Industrie Strasse 3, 9404 Rorschacherberg</div>
+  <div class="ii-sep"></div>
+  <div class="ii"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Mo–Fr <strong>07:00–17:00</strong></div>
 </div>
 
 <!-- TRUST STRIP -->
-<div class="trust-row">
-  <div class="titem">
-    <div class="titem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <div class="titem-text"><strong>Zertifizierter Fachbetrieb</strong><span>Geprüfte Qualität</span></div>
-  </div>
-  <div class="titem">
-    <div class="titem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <div class="titem-text"><strong>Festpreisgarantie</strong><span>Transparent &amp; fair</span></div>
-  </div>
-  <div class="titem">
-    <div class="titem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div class="titem-text"><strong>24h Notfallservice</strong><span>Immer erreichbar</span></div>
-  </div>
-  <div class="titem">
-    <div class="titem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-    <div class="titem-text"><strong>15+ Fachspezialisten</strong><span>Erfahrenes Team</span></div>
-  </div>
+<div class="trust">
+  <div class="ti"><div class="ti-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="ti-text"><strong>Zertifizierter Fachbetrieb</strong><span>Geprüfte Qualität</span></div></div>
+  <div class="ti"><div class="ti-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ti-text"><strong>Festpreisgarantie</strong><span>Transparent &amp; fair</span></div></div>
+  <div class="ti"><div class="ti-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="ti-text"><strong>24h Notfallservice</strong><span>Immer erreichbar</span></div></div>
+  <div class="ti"><div class="ti-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><div class="ti-text"><strong>15+ Fachspezialisten</strong><span>Erfahrenes Team</span></div></div>
 </div>
+
 <!-- LEISTUNGEN -->
-<section id="leistungen" class="section section-sep">
-  <div class="eyebrow"><span class="eyebrow-dot"></span>Leistungen</div>
-  <h2 class="stitle">Alles aus einer Hand</h2>
-  <p class="sdesc">Von der Planung über die Installation bis zur Wartung – wir decken alle Bereiche moderner Gebäudetechnik ab.</p>
-  <div class="scards">
-    <div class="scard">
-      <div class="scard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/Viessmann_WP.jpeg" alt="Wärmetechnik"></div>
-      <div class="scard-body">
-        <div class="scard-tag">Wärme</div>
-        <h3>Wärmetechnik</h3>
-        <p>Wärmepumpen, Solaranlagen, Holzheizungen und Gasheizungen – effiziente Heizsysteme nach Mass.</p>
-        <a href="#kontakt" class="scard-link">Mehr erfahren <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
+<section id="leistungen">
+  <div class="section-inner">
+    <div class="sh">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Leistungen</div>
+      <h2 class="st">Alles aus einer Hand</h2>
+      <p class="sd">Von der Planung über die Installation bis zur Wartung – wir decken alle Bereiche moderner Gebäudetechnik ab.</p>
     </div>
-    <div class="scard">
-      <div class="scard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/5556.jpg" alt="Sanitärtechnik"></div>
-      <div class="scard-body">
-        <div class="scard-tag">Wasser</div>
-        <h3>Sanitärtechnik</h3>
-        <p>Bäder, Duschen, Küchen und Entwässerung – professionelle Sanitärinstallationen mit hochwertigen Materialien.</p>
-        <a href="#kontakt" class="scard-link">Mehr erfahren <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="scards">
+      <div class="scard">
+        <div class="scard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/Viessmann_WP.jpeg" alt="Wärmetechnik"></div>
+        <div class="scard-body">
+          <div class="scard-tag">Wärme</div>
+          <h3>Wärmetechnik</h3>
+          <p>Wärmepumpen, Solaranlagen, Holzheizungen und Gasheizungen – effiziente Heizsysteme nach Mass.</p>
+          <a href="#" class="scard-link">Mehr erfahren <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
       </div>
-    </div>
-    <div class="scard">
-      <div class="scard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/ss.png" alt="Lüftungstechnik"></div>
-      <div class="scard-body">
-        <div class="scard-tag">Luft</div>
-        <h3>Lüftungstechnik</h3>
-        <p>Kontrollierte Wohnraumlüftung, Klimaanlagen und Lüftungsanlagen für gesundes Raumklima.</p>
-        <a href="#kontakt" class="scard-link">Mehr erfahren <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <div class="scard">
+        <div class="scard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/5556.jpg" alt="Sanitärtechnik"></div>
+        <div class="scard-body">
+          <div class="scard-tag">Wasser</div>
+          <h3>Sanitärtechnik</h3>
+          <p>Bäder, Duschen, Küchen und Entwässerung – professionelle Sanitärinstallationen mit hochwertigen Materialien.</p>
+          <a href="#" class="scard-link">Mehr erfahren <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="scard">
+        <div class="scard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/ss.png" alt="Lüftungstechnik"></div>
+        <div class="scard-body">
+          <div class="scard-tag">Luft</div>
+          <h3>Lüftungstechnik</h3>
+          <p>Kontrollierte Wohnraumlüftung, Klimaanlagen und Lüftungsanlagen für gesundes Raumklima.</p>
+          <a href="#" class="scard-link">Mehr erfahren <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ÜBER UNS -->
-<div class="section-alt">
-<section id="ueber" class="section">
-  <div class="about-row">
-    <div class="about-text">
-      <div class="eyebrow"><span class="eyebrow-dot"></span>Über uns</div>
-      <h2 class="stitle">Ihr verlässlicher<br>Partner in der Haustechnik</h2>
-      <p style="font-size:15px;color:var(--text-3);line-height:1.75;margin-top:10px;">Seit über 38 Jahren sind wir Ihr kompetenter Ansprechpartner in der Ostschweiz. Mit einem erfahrenen Team realisieren wir Projekte jeder Grösse – termingerecht und in höchster Qualität.</p>
-      <ul class="checklist">
-        <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Persönliche Beratung und massgeschneiderte Lösungen</li>
-        <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Zertifizierter Fachbetrieb mit regionaler Verwurzelung</li>
-        <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Energieeffiziente und nachhaltige Systeme</li>
-        <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Schneller Notfall- und Reparaturservice</li>
-      </ul>
-      <a href="#kontakt" class="btn-red">Kontakt aufnehmen</a>
-      <div class="anums">
-        <div class="anum"><strong>38+</strong><span>Jahre in der Ostschweiz</span></div>
-        <div class="anum"><strong>2000+</strong><span>Abgeschlossene Projekte</span></div>
+<section id="ueber" class="section-alt">
+  <div class="section-inner">
+    <div class="about-row">
+      <div class="about-txt">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Über uns</div>
+        <h2 class="st">Ihr verlässlicher<br>Partner in der Haustechnik</h2>
+        <p style="font-size:15px;color:var(--ink-3);line-height:1.75;margin-top:10px;">Seit über 38 Jahren sind wir Ihr kompetenter Ansprechpartner in der Ostschweiz. Mit einem erfahrenen Team realisieren wir Projekte jeder Grösse – termingerecht und in höchster Qualität.</p>
+        <ul class="checklist">
+          <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Persönliche Beratung und massgeschneiderte Lösungen</li>
+          <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Zertifizierter Fachbetrieb mit regionaler Verwurzelung</li>
+          <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Energieeffiziente und nachhaltige Systeme</li>
+          <li><div class="chk"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Schneller Notfall- und Reparaturservice</li>
+        </ul>
+        <a href="#" onclick="document.querySelector('.hero-form-panel input').focus();return false;" class="btn-blue" style="display:inline-block;">Jetzt anfragen</a>
+        <div class="anums">
+          <div class="anum"><strong>38+</strong><span>Jahre in der Ostschweiz</span></div>
+          <div class="anum"><strong>2000+</strong><span>Abgeschlossene Projekte</span></div>
+        </div>
       </div>
-    </div>
-    <div class="about-img">
-      <img src="https://www.mannhart-ag.ch/fileadmin/documents/Hoval_1.jpg" alt="Mannhart Team">
+      <div class="about-img">
+        <img src="https://www.mannhart-ag.ch/fileadmin/documents/Hoval_1.jpg" alt="Mannhart Team">
+      </div>
     </div>
   </div>
 </section>
-</div>
 
 <!-- REFERENZEN -->
-<section id="referenzen" class="section section-sep">
-  <div class="sec-center">
-    <div class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span>Referenzprojekte</div>
-    <h2 class="stitle">Unsere Arbeit spricht für sich</h2>
-    <p class="sdesc">Eine Auswahl aus über 2000 realisierten Projekten.</p>
-  </div>
-  <div class="rgrid">
-    <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/Viessmann_WP.jpeg" alt="WP"></div><div class="rcard-body"><div class="rcard-cat">Wärmetechnik</div><h3>Wärmepumpenanlage EFH</h3><p>Luft-Wasser-Wärmepumpe mit Fussbodenheizung, Effizienzklasse A+++.</p></div></div>
-    <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/Elco_1.jpg" alt="Solar"></div><div class="rcard-body"><div class="rcard-cat">Solarenergie</div><h3>Solarthermie-Anlage</h3><p>Solaranlage zur Warmwasseraufbereitung und Heizungsunterstützung.</p></div></div>
-    <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/777.jpg" alt="Bad"></div><div class="rcard-body"><div class="rcard-cat">Sanitärtechnik</div><h3>Badezimmer-Renovation</h3><p>Komplette Badsanierung mit bodenebener Dusche und hochwertigen Armaturen.</p></div></div>
-    <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/ss.png" alt="Luft"></div><div class="rcard-body"><div class="rcard-cat">Lüftungstechnik</div><h3>Wohnraumlüftung MFH</h3><p>Kontrollierte Lüftung mit Wärmerückgewinnung für ein Mehrfamilienhaus.</p></div></div>
-    <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/44.jpeg" alt="Pellet"></div><div class="rcard-body"><div class="rcard-cat">Wärmetechnik</div><h3>Holzpellet-Heizung</h3><p>Pelletheizanlage mit automatischer Beschickung für nachhaltiges Heizen.</p></div></div>
-    <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/9443cfdf6abb7a2363654668aa6b7094.jpg" alt="Gewerbe"></div><div class="rcard-body"><div class="rcard-cat">Gewerbebau</div><h3>Klimaanlage Gewerbe</h3><p>Klimatisierung und Lüftung für Gewerbeflächen und Bürogebäude.</p></div></div>
+<section id="referenzen">
+  <div class="section-inner">
+    <div class="sh sh-c">
+      <div class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span>Referenzprojekte</div>
+      <h2 class="st">Unsere Arbeit spricht für sich</h2>
+      <p class="sd">Eine Auswahl aus über 2000 realisierten Projekten.</p>
+    </div>
+    <div class="rgrid">
+      <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/Viessmann_WP.jpeg" alt="WP"></div><div class="rcard-body"><div class="rcard-cat">Wärmetechnik</div><h3>Wärmepumpenanlage EFH</h3><p>Luft-Wasser-Wärmepumpe mit Fussbodenheizung, Effizienzklasse A+++.</p></div></div>
+      <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/Elco_1.jpg" alt="Solar"></div><div class="rcard-body"><div class="rcard-cat">Solarenergie</div><h3>Solarthermie-Anlage</h3><p>Solaranlage zur Warmwasseraufbereitung und Heizungsunterstützung.</p></div></div>
+      <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/777.jpg" alt="Bad"></div><div class="rcard-body"><div class="rcard-cat">Sanitärtechnik</div><h3>Badezimmer-Renovation</h3><p>Komplette Badsanierung mit bodenebener Dusche und hochwertigen Armaturen.</p></div></div>
+      <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/ss.png" alt="Luft"></div><div class="rcard-body"><div class="rcard-cat">Lüftungstechnik</div><h3>Wohnraumlüftung MFH</h3><p>Kontrollierte Lüftung mit Wärmerückgewinnung für ein Mehrfamilienhaus.</p></div></div>
+      <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/documents/44.jpeg" alt="Pellet"></div><div class="rcard-body"><div class="rcard-cat">Wärmetechnik</div><h3>Holzpellet-Heizung</h3><p>Pelletheizanlage mit automatischer Beschickung für nachhaltiges Heizen.</p></div></div>
+      <div class="rcard"><div class="rcard-img"><img src="https://www.mannhart-ag.ch/fileadmin/images/9443cfdf6abb7a2363654668aa6b7094.jpg" alt="Gewerbe"></div><div class="rcard-body"><div class="rcard-cat">Gewerbebau</div><h3>Klimaanlage Gewerbe</h3><p>Klimatisierung und Lüftung für Gewerbeflächen und Bürogebäude.</p></div></div>
+    </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<div class="section-alt">
-<section class="section">
-  <div class="sec-center">
-    <div class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span>Kundenstimmen</div>
-    <h2 class="stitle">Was unsere Kunden sagen</h2>
-    <p class="sdesc">Über 2000 zufriedene Kunden vertrauen auf unsere Arbeit.</p>
-  </div>
-  <div class="tgrid">
-    <div class="tcard"><div class="tstars">★★★★★</div><blockquote>"Die Wärmepumpe läuft seit der Installation tadellos. Hervorragende Beratung, saubere Ausführung und ein sehr freundliches Team. Rundum zufrieden."</blockquote><div class="tauthor"><div class="tavatar">MH</div><div class="tauthor-name"><strong>M. Huber</strong><span>Einfamilienhaus, Rorschach</span></div></div></div>
-    <div class="tcard"><div class="tstars">★★★★★</div><blockquote>"Unser Badezimmer wurde komplett renoviert – perfekte Handwerksarbeit, pünktlich und zum vereinbarten Preis. Sehr empfehlenswert!"</blockquote><div class="tauthor"><div class="tavatar">SK</div><div class="tauthor-name"><strong>S. Keller</strong><span>Wohnung, St. Gallen</span></div></div></div>
-    <div class="tcard"><div class="tstars">★★★★★</div><blockquote>"Professionelle Planung und Installation der Lüftungsanlage. Immer erreichbar, kompetent und zuverlässig. Klare Empfehlung!"</blockquote><div class="tauthor"><div class="tavatar">TB</div><div class="tauthor-name"><strong>T. Brunner</strong><span>Gewerbe, Arbon</span></div></div></div>
+<section class="section-alt">
+  <div class="section-inner">
+    <div class="sh sh-c">
+      <div class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span>Kundenstimmen</div>
+      <h2 class="st">Was unsere Kunden sagen</h2>
+      <p class="sd">Über 2000 zufriedene Kunden in der Ostschweiz.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tcard"><div class="tstars">★★★★★</div><blockquote>"Die Wärmepumpe läuft seit der Installation tadellos. Hervorragende Beratung, saubere Ausführung und ein sehr freundliches Team."</blockquote><div class="tauthor"><div class="tavatar">MH</div><div class="tname"><strong>M. Huber</strong><span>Einfamilienhaus, Rorschach</span></div></div></div>
+      <div class="tcard"><div class="tstars">★★★★★</div><blockquote>"Unser Badezimmer wurde komplett renoviert – perfekte Handwerksarbeit, pünktlich und zum vereinbarten Preis."</blockquote><div class="tauthor"><div class="tavatar">SK</div><div class="tname"><strong>S. Keller</strong><span>Wohnung, St. Gallen</span></div></div></div>
+      <div class="tcard"><div class="tstars">★★★★★</div><blockquote>"Professionelle Planung und Installation der Lüftungsanlage. Immer erreichbar, kompetent und zuverlässig."</blockquote><div class="tauthor"><div class="tavatar">TB</div><div class="tname"><strong>T. Brunner</strong><span>Gewerbe, Arbon</span></div></div></div>
+    </div>
   </div>
 </section>
-</div>
 
 <!-- EINZUGSGEBIET -->
-<section class="section section-sep">
-  <div class="area-row">
-    <div class="area-text">
-      <div class="eyebrow"><span class="eyebrow-dot"></span>Einzugsgebiet</div>
-      <h2 class="stitle">Ihre Region,<br>unser Revier</h2>
-      <p style="font-size:15px;color:var(--text-3);line-height:1.75;margin-top:10px;">Wir sind in der gesamten Ostschweiz tätig und betreuen Kunden zuverlässig und schnell.</p>
-      <div class="rlist">
-        <div class="rrow"><div class="rrow-name"><span class="rdot"></span>St. Gallen</div><span class="rbadge">Hauptgebiet</span></div>
-        <div class="rrow"><div class="rrow-name"><span class="rdot"></span>Rorschach &amp; Bodenseeregion</div><span class="rbadge">Hauptgebiet</span></div>
-        <div class="rrow"><div class="rrow-name"><span class="rdot"></span>Thurgau</div><span class="rbadge">Erweitertes Gebiet</span></div>
-        <div class="rrow"><div class="rrow-name"><span class="rdot"></span>Appenzell</div><span class="rbadge">Auf Anfrage</span></div>
+<section>
+  <div class="section-inner">
+    <div class="area-row">
+      <div class="area-txt">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Einzugsgebiet</div>
+        <h2 class="st">Ihre Region,<br>unser Revier</h2>
+        <p style="font-size:15px;color:var(--ink-3);line-height:1.75;margin-top:10px;">Wir sind in der gesamten Ostschweiz tätig und betreuen Kunden zuverlässig und schnell.</p>
+        <div class="rlist">
+          <div class="rrow"><div class="rrow-l"><span class="rdot"></span>St. Gallen</div><span class="rbadge">Hauptgebiet</span></div>
+          <div class="rrow"><div class="rrow-l"><span class="rdot"></span>Rorschach &amp; Bodenseeregion</div><span class="rbadge">Hauptgebiet</span></div>
+          <div class="rrow"><div class="rrow-l"><span class="rdot"></span>Thurgau</div><span class="rbadge">Erweitertes Gebiet</span></div>
+          <div class="rrow"><div class="rrow-l"><span class="rdot"></span>Appenzell</div><span class="rbadge">Auf Anfrage</span></div>
+        </div>
+        <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="btn-blue" style="display:inline-block;">Anfrage stellen</a>
       </div>
-      <a href="#kontakt" class="btn-red">Verfügbarkeit prüfen</a>
-    </div>
-    <div class="area-img">
-      <img src="https://www.mannhart-ag.ch/fileadmin/documents/Hoval_3.jpg" alt="Einzugsgebiet">
+      <div class="area-img">
+        <img src="https://www.mannhart-ag.ch/fileadmin/documents/Hoval_3.jpg" alt="Einzugsgebiet">
+      </div>
     </div>
   </div>
 </section>
-
-<!-- KONTAKT -->
-<div class="section-alt">
-<section id="kontakt" class="section">
-  <div class="contact-grid">
-    <div class="contact-text">
-      <div class="eyebrow"><span class="eyebrow-dot"></span>Kontakt</div>
-      <h2 class="stitle">Wir sind<br>für Sie da</h2>
-      <p>Haben Sie Fragen oder möchten ein Projekt besprechen? Nehmen Sie unverbindlich Kontakt auf – wir melden uns schnell.</p>
-      <div class="citems">
-        <div class="citem"><div class="citem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-1.07-4.6A2 2 0 013.98 2.72h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div class="citem-text"><strong>Telefon</strong><span>+41 71 780 09 09</span></div></div>
-        <div class="citem"><div class="citem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="citem-text"><strong>E-Mail</strong><span>info@mannhart-ag.ch</span></div></div>
-        <div class="citem"><div class="citem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="citem-text"><strong>Adresse</strong><span>Industrie Strasse 3, 9404 Rorschacherberg</span></div></div>
-        <div class="citem"><div class="citem-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="citem-text"><strong>Öffnungszeiten</strong><span>Mo–Fr: 07:00–17:00 Uhr</span></div></div>
-      </div>
-    </div>
-    <div class="cform">
-      <h3>Anfrage senden</h3>
-      <p>Wir antworten innerhalb von 24 Stunden.</p>
-      <div class="frow">
-        <div class="fg"><label>Vorname</label><input type="text" placeholder="Max"></div>
-        <div class="fg"><label>Nachname</label><input type="text" placeholder="Muster"></div>
-      </div>
-      <div class="fg"><label>E-Mail</label><input type="email" placeholder="max@muster.ch"></div>
-      <div class="fg"><label>Telefon</label><input type="tel" placeholder="+41 ..."></div>
-      <div class="fg"><label>Leistung</label><select><option>Wärmetechnik / Heizung</option><option>Sanitärtechnik</option><option>Lüftungstechnik</option><option>Sonstiges</option></select></div>
-      <div class="fg"><label>Nachricht</label><textarea placeholder="Beschreiben Sie Ihr Projekt..."></textarea></div>
-      <button class="fbtn">Anfrage absenden</button>
-    </div>
-  </div>
-</section>
-</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
+  <div class="footer-in">
     <div class="footer-grid">
-      <div class="fbrand">
-        <img src="https://www.mannhart-ag.ch/resources/Public/Images/logo_mannhart.svg" alt="Mannhart" height="30" style="filter:brightness(0) invert(1);">
+      <div class="fb">
+        <img src="https://www.mannhart-ag.ch/resources/Public/Images/logo_mannhart.svg" alt="Mannhart" height="28" style="filter:brightness(0) invert(1);">
         <p>Ihr zuverlässiger Partner für Wärme-, Wasser- und Lufttechnik in der Ostschweiz. Seit 1986 mit Leidenschaft dabei.</p>
       </div>
-      <div class="fcol"><h4>Leistungen</h4><ul><li><a href="#">Wärmetechnik</a></li><li><a href="#">Sanitärtechnik</a></li><li><a href="#">Lüftungstechnik</a></li><li><a href="#">Solarenergie</a></li><li><a href="#">Holzheizungen</a></li></ul></div>
-      <div class="fcol"><h4>Unternehmen</h4><ul><li><a href="#">Über uns</a></li><li><a href="#">Team</a></li><li><a href="#">Referenzen</a></li><li><a href="#">Karriere</a></li></ul></div>
-      <div class="fcol"><h4>Kontakt</h4><ul><li><a href="#">+41 71 780 09 09</a></li><li><a href="#">info@mannhart-ag.ch</a></li><li><a href="#">Anfahrt</a></li><li><a href="#">Notfallservice</a></li></ul></div>
+      <div class="fc"><h4>Leistungen</h4><ul><li><a href="#">Wärmetechnik</a></li><li><a href="#">Sanitärtechnik</a></li><li><a href="#">Lüftungstechnik</a></li><li><a href="#">Solarenergie</a></li></ul></div>
+      <div class="fc"><h4>Unternehmen</h4><ul><li><a href="#">Über uns</a></li><li><a href="#">Team</a></li><li><a href="#">Referenzen</a></li><li><a href="#">Karriere</a></li></ul></div>
+      <div class="fc"><h4>Kontakt</h4><ul><li><a href="#">+41 71 780 09 09</a></li><li><a href="#">info@mannhart-ag.ch</a></li><li><a href="#">Rorschacherberg</a></li><li><a href="#">Notfallservice</a></li></ul></div>
     </div>
     <div class="footer-bot">
       <span>© 2024 Mannhart Gebäudetechnik AG. Alle Rechte vorbehalten.</span>
