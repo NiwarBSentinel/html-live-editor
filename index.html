@@ -6,106 +6,26 @@
   <title>HTML Live Editor</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #1e1e2e;
-      color: #cdd6f4;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      background: #181825;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 2px solid #89b4fa;
-    }
-
-    header h1 {
-      font-size: 1.2rem;
-      color: #89b4fa;
-    }
-
-    .btn {
-      padding: 6px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: opacity 0.2s;
-    }
-    .btn:hover { opacity: 0.85; }
+    body { font-family: 'Segoe UI', sans-serif; background: #1e1e2e; color: #cdd6f4; height: 100vh; display: flex; flex-direction: column; }
+    header { background: #181825; padding: 12px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #89b4fa; }
+    header h1 { font-size: 1.2rem; color: #89b4fa; flex: 1; }
+    .btn { padding: 6px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
     .btn-run { background: #a6e3a1; color: #1e1e2e; }
     .btn-clear { background: #f38ba8; color: #1e1e2e; }
-    .btn-copy { background: #89b4fa; color: #1e1e2e; }
-
-    .workspace {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .editor-panel, .preview-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .panel-label {
-      background: #313244;
-      padding: 6px 16px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #bac2de;
-    }
-
-    textarea#code {
-      flex: 1;
-      background: #1e1e2e;
-      color: #cdd6f4;
-      border: none;
-      border-right: 2px solid #313244;
-      padding: 16px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      resize: none;
-      outline: none;
-    }
-
-    textarea#code::placeholder { color: #585b70; }
-
-    iframe#preview {
-      flex: 1;
-      border: none;
-      background: #fff;
-    }
-
-    .status-bar {
-      background: #181825;
-      padding: 4px 16px;
-      font-size: 0.75rem;
-      color: #6c7086;
-      border-top: 1px solid #313244;
-    }
+    .workspace { display: flex; flex: 1; overflow: hidden; }
+    .editor-panel, .preview-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .panel-label { background: #313244; padding: 6px 16px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #bac2de; }
+    textarea#code { flex: 1; background: #1e1e2e; color: #cdd6f4; border: none; border-right: 2px solid #313244; padding: 16px; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.5; resize: none; outline: none; }
+    iframe#preview { flex: 1; border: none; background: #fff; }
+    .status-bar { background: #181825; padding: 4px 16px; font-size: 0.75rem; color: #6c7086; border-top: 1px solid #313244; }
   </style>
 </head>
 <body>
-
 <header>
   <h1>HTML Live Editor</h1>
   <button class="btn btn-run" onclick="runCode()">Ausfuehren</button>
   <button class="btn btn-clear" onclick="clearAll()">Leeren</button>
-  <button class="btn btn-copy" onclick="copyCode()">Kopieren</button>
 </header>
-
 <div class="workspace">
   <div class="editor-panel">
     <div class="panel-label">HTML Code eingeben</div>
@@ -116,43 +36,117 @@
     <iframe id="preview"></iframe>
   </div>
 </div>
-
 <div class="status-bar" id="status">Bereit</div>
-
 <script>
-  let autoRunTimer = null;
-
+  let timer = null;
+  const sample = `<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mannhart Gebäudetechnik AG</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; color: #222; }
+nav { background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,.10); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 68px; position: sticky; top: 0; z-index: 100; }
+.nlo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nli { width: 44px; height: 44px; background: linear-gradient(135deg,#e8440a,#f5a623); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 3px 10px rgba(232,68,10,.35); }
+.nlt { font-size: 17px; font-weight: 800; color: #1a3a5c; line-height: 1.2; }
+.nls { font-size: 11px; color: #999; }
+.nl { display: flex; gap: 30px; list-style: none; align-items: center; }
+.nl a { text-decoration: none; color: #444; font-size: 14px; font-weight: 500; }
+.nc { background: #e8440a; color: #fff; padding: 11px 24px; border-radius: 7px; font-size: 14px; font-weight: 700; text-decoration: none; }
+.hero { min-height: 480px; background: linear-gradient(120deg,#0d2b4e 0%,#1a3a5c 50%,#1e5799 100%); display: flex; align-items: center; }
+.hcont { padding: 60px; max-width: 600px; }
+.hbadge { display: inline-block; background: rgba(232,68,10,.18); color: #f5a623; border: 1px solid rgba(245,166,35,.3); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 18px; }
+.hero h1 { font-size: 48px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+.hero h1 span { color: #f5a623; }
+.hsub { font-size: 17px; color: rgba(255,255,255,.75); margin-bottom: 28px; }
+.hbtns { display: flex; gap: 12px; }
+.bp { background: #e8440a; color: #fff; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; }
+.bs { background: rgba(255,255,255,.11); color: #fff; padding: 14px 26px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; border: 1.5px solid rgba(255,255,255,.26); }
+.tbar { background: #fff; padding: 20px 52px; display: flex; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+.ti { text-align: center; flex: 1; max-width: 190px; padding: 4px 0; border-right: 1px solid #f0f0f0; }
+.ti:last-child { border-right: none; }
+.tn { font-size: 26px; font-weight: 900; color: #e8440a; }
+.tl { font-size: 11px; color: #777; margin-top: 3px; }
+section { padding: 70px 52px; }
+.stag { color: #e8440a; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+.stitle { font-size: 32px; font-weight: 900; color: #1a3a5c; margin-bottom: 12px; }
+.ssub { font-size: 14px; color: #555; line-height: 1.8; max-width: 500px; }
+.leis { background: #f4f7fb; }
+.lh { text-align: center; margin-bottom: 42px; }
+.cards { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.card { background: #fff; border-radius: 16px; padding: 32px 26px; flex: 1; min-width: 240px; max-width: 320px; box-shadow: 0 4px 22px rgba(0,0,0,.07); border-top: 4px solid transparent; }
+.w1 { border-top-color: #e8440a; } .w2 { border-top-color: #2196f3; } .w3 { border-top-color: #00bcd4; }
+.ci { width: 54px; height: 54px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
+.w1 .ci { background: #fff4ee; } .w2 .ci { background: #e8f4fd; } .w3 .ci { background: #e0f7fa; }
+.card h3 { font-size: 21px; font-weight: 800; color: #1a3a5c; margin-bottom: 8px; }
+.card p { font-size: 13px; color: #666; line-height: 1.65; margin-bottom: 14px; }
+.cl { list-style: none; margin-bottom: 18px; }
+.cl li { font-size: 13px; color: #555; padding: 3px 0 3px 18px; position: relative; }
+.cl li::before { content: "✓"; position: absolute; left: 0; color: #e8440a; font-weight: 800; }
+.cta { background: linear-gradient(130deg,#e8440a,#c73206); padding: 68px 52px; text-align: center; }
+.cta h2 { font-size: 38px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+.cta p { font-size: 16px; color: rgba(255,255,255,.84); max-width: 520px; margin: 0 auto 30px; }
+.kbtns { display: flex; gap: 14px; justify-content: center; }
+.kbp { background: #fff; color: #e8440a; padding: 14px 30px; border-radius: 8px; font-size: 15px; font-weight: 800; text-decoration: none; }
+.kbs { background: transparent; color: #fff; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; border: 2px solid rgba(255,255,255,.4); }
+footer { background: #0c2240; padding: 40px 52px 22px; color: rgba(255,255,255,.5); font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nlo" href="#"><div class="nli">🔥</div><div><div class="nlt">Mannhart</div><div class="nls">Gebäudetechnik AG</div></div></a>
+  <ul class="nl"><li><a href="#">Wärme</a></li><li><a href="#">Wasser</a></li><li><a href="#">Luft</a></li><li><a href="#">Über uns</a></li></ul>
+  <a class="nc" href="#">Offerte anfragen</a>
+</nav>
+<div class="hero">
+  <div class="hcont">
+    <div class="hbadge">🏆 Ihr Spezialist im Zürcher Oberland</div>
+    <h1>Wärme, Wasser &amp; Luft –<br><span>Aus einer Hand.</span></h1>
+    <p class="hsub">Persönlich, flexibel und kompetent: Mannhart Gebäudetechnik plant massgeschneiderte Heizungs-, Sanitär- und Lüftungsanlagen.</p>
+    <div class="hbtns"><a class="bp" href="#">📋 Kostenlose Offerte</a><a class="bs" href="#">Leistungen →</a></div>
+  </div>
+</div>
+<div class="tbar">
+  <div class="ti"><div class="tn">25+</div><div class="tl">Jahre Erfahrung</div></div>
+  <div class="ti"><div class="tn">500+</div><div class="tl">Realisierte Projekte</div></div>
+  <div class="ti"><div class="tn">3</div><div class="tl">Fachbereiche</div></div>
+  <div class="ti"><div class="tn">⭐ 5.0</div><div class="tl">Google Bewertung</div></div>
+</div>
+<section class="leis">
+  <div class="lh"><div class="stag">Unsere Leistungen</div><h2 class="stitle">Alles rund um Ihre Gebäudetechnik</h2></div>
+  <div class="cards">
+    <div class="card w1"><div class="ci">🔥</div><h3>Wärme</h3><p>Effiziente Heizsysteme für Ihr Gebäude.</p><ul class="cl"><li>Wärmepumpen</li><li>Solaranlagen</li><li>Holz- &amp; Ölheizungen</li></ul></div>
+    <div class="card w2"><div class="ci">💧</div><h3>Wasser</h3><p>Verantwortungsvoller Umgang mit Wasser.</p><ul class="cl"><li>Sanitärinstallationen</li><li>Badsanierungen</li><li>Enthärtungsanlagen</li></ul></div>
+    <div class="card w3"><div class="ci">💨</div><h3>Luft</h3><p>Gesundes Raumklima für Wohn- und Gewerberäume.</p><ul class="cl"><li>Kontrollierte Wohnlüftung</li><li>Küchenabluft</li><li>Wartung &amp; Service</li></ul></div>
+  </div>
+</section>
+<div class="cta">
+  <h2>Bereit für Ihr nächstes Projekt?</h2>
+  <p>Kontaktieren Sie uns für eine kostenlose Beratung.</p>
+  <div class="kbtns"><a class="kbp" href="mailto:info@mannhart-ag.ch">📋 Offerte anfordern</a><a class="kbs" href="tel:0523852929">📞 052 385 29 29</a></div>
+</div>
+<footer>© 2025 Mannhart Gebäudetechnik AG · Mettlenstrasse 10, 8488 Turbenthal</footer>
+</body>
+</html>`;
+  document.getElementById('code').value = sample;
   function runCode() {
     const code = document.getElementById('code').value;
     const frame = document.getElementById('preview');
     const doc = frame.contentDocument || frame.contentWindow.document;
-    doc.open();
-    doc.write(code);
-    doc.close();
-    document.getElementById('status').textContent = 'Vorschau aktualisiert: ' + new Date().toLocaleTimeString();
+    doc.open(); doc.write(code); doc.close();
+    document.getElementById('status').textContent = 'Vorschau: ' + new Date().toLocaleTimeString();
   }
-
-  function autoRun() {
-    clearTimeout(autoRunTimer);
-    autoRunTimer = setTimeout(runCode, 600);
-  }
-
+  function autoRun() { clearTimeout(timer); timer = setTimeout(runCode, 600); }
   function clearAll() {
     document.getElementById('code').value = '';
     const frame = document.getElementById('preview');
     const doc = frame.contentDocument || frame.contentWindow.document;
     doc.open(); doc.write(''); doc.close();
-    document.getElementById('status').textContent = 'Editor geleert.';
   }
-
-  function copyCode() {
-    const code = document.getElementById('code').value;
-    if (!code) { alert('Kein Code!'); return; }
-    navigator.clipboard.writeText(code).then(() => {
-      document.getElementById('status').textContent = 'Kopiert!';
-    });
-  }
+  runCode();
 </script>
-
 </body>
 </html>
