@@ -137,6 +137,20 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
   .about-grid,.gebiete-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
 }
+
+/* ── VIDEO THUMBNAIL ── */
+.video-thumb-wrap{border-radius:20px;overflow:hidden;box-shadow:0 12px 48px rgba(0,28,48,.15);}
+.video-thumb{position:relative;aspect-ratio:16/10;cursor:pointer;overflow:hidden;}
+.video-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.video-thumb:hover img{transform:scale(1.04);}
+.video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,28,48,.15) 0%,rgba(0,28,48,.55) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;}
+.play-btn{background:none;border:none;cursor:pointer;transition:transform .2s,filter .2s;padding:0;}
+.play-btn svg{width:80px;height:80px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.4));}
+.play-btn:hover{transform:scale(1.1);}
+.play-btn:hover svg circle{fill:rgba(0,167,225,0.45);}
+.video-label{text-align:center;}
+.video-tag{display:inline-block;background:#00a7e1;color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:6px;}
+.video-label p{color:rgba(255,255,255,.9);font-size:.9rem;font-weight:600;}
 </style>
 </head>
 <body>
@@ -306,8 +320,22 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
 <section id="ueber-uns" class="about-section">
   <div class="section-inner">
     <div class="about-grid">
-      <div class="about-img-wrap">
-        <img src="https://www.mannhart-ag.ch/fileadmin/documents/Hoval_1.jpg" alt="Mannhart Team" loading="lazy">
+      <div class="video-thumb-wrap">
+        <div class="video-thumb">
+          <img src="https://www.mannhart-ag.ch/fileadmin/documents/Viessmann_WP.jpeg" alt="Mannhart Unternehmensvideo" loading="lazy">
+          <div class="video-overlay">
+            <button class="play-btn" aria-label="Video abspielen">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                <polygon points="32,24 32,56 58,40" fill="white"/>
+              </svg>
+            </button>
+            <div class="video-label">
+              <span class="video-tag">UNTERNEHMENSVIDEO</span>
+              <p>Mannhart Gebäudetechnik AG – Wer wir sind</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="about-text">
         <div class="section-label">ÜBER UNS</div>
