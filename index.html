@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mannhart Gebäudetechnik AG</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; color: #222; }
+
+/* NAV */
+nav { background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,.10); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 68px; position: sticky; top: 0; z-index: 100; }
+.nlo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nli { width: 44px; height: 44px; background: linear-gradient(135deg,#e8440a,#f5a623); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 3px 10px rgba(232,68,10,.35); }
+.nlt { font-size: 17px; font-weight: 800; color: #1a3a5c; line-height: 1.2; }
+.nls { font-size: 11px; color: #999; }
+.nl { display: flex; gap: 30px; list-style: none; align-items: center; }
+.nl a { text-decoration: none; color: #444; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nl a:hover { color: #e8440a; }
+.nc { background: #e8440a; color: #fff; padding: 11px 24px; border-radius: 7px; font-size: 14px; font-weight: 700; text-decoration: none; box-shadow: 0 3px 10px rgba(232,68,10,.3); }
+
+/* HERO */
+.hero { min-height: 480px; background: linear-gradient(120deg,#0d2b4e 0%,#1a3a5c 50%,#1e5799 100%); display: flex; align-items: center; position: relative; overflow: hidden; }
+.hc1 { position: absolute; right: -60px; top: -60px; width: 420px; height: 420px; background: rgba(255,255,255,.04); border-radius: 50%; }
+.hc2 { position: absolute; right: 130px; bottom: -100px; width: 280px; height: 280px; background: rgba(232,68,10,.14); border-radius: 50%; }
+.hcont { padding: 60px 60px; max-width: 600px; position: relative; z-index: 2; }
+.hbadge { display: inline-block; background: rgba(232,68,10,.18); color: #f5a623; border: 1px solid rgba(245,166,35,.3); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 18px; }
+.hero h1 { font-size: 48px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+.hero h1 span { color: #f5a623; }
+.hsub { font-size: 17px; color: rgba(255,255,255,.75); line-height: 1.75; margin-bottom: 28px; max-width: 480px; }
+.hbtns { display: flex; gap: 12px; flex-wrap: wrap; }
+.bp { background: #e8440a; color: #fff; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgba(232,68,10,.45); }
+.bs { background: rgba(255,255,255,.11); color: #fff; padding: 14px 26px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; border: 1.5px solid rgba(255,255,255,.26); }
+
+/* TRUST BAR */
+.tbar { background: #fff; padding: 20px 52px; display: flex; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+.ti { text-align: center; flex: 1; max-width: 190px; padding: 4px 0; border-right: 1px solid #f0f0f0; }
+.ti:last-child { border-right: none; }
+.tn { font-size: 26px; font-weight: 900; color: #e8440a; }
+.tl { font-size: 11px; color: #777; margin-top: 3px; }
+
+/* SECTIONS */
+section { padding: 70px 52px; }
+.stag { color: #e8440a; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+.stitle { font-size: 32px; font-weight: 900; color: #1a3a5c; margin-bottom: 12px; }
+.ssub { font-size: 14px; color: #555; line-height: 1.8; max-width: 500px; }
+
+/* LEISTUNGEN */
+.leis { background: #f4f7fb; }
+.lh { text-align: center; margin-bottom: 42px; }
+.lh .ssub { margin: 0 auto; }
+.cards { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.card { background: #fff; border-radius: 16px; padding: 32px 26px; flex: 1; min-width: 240px; max-width: 320px; box-shadow: 0 4px 22px rgba(0,0,0,.07); border-top: 4px solid transparent; }
+.w1 { border-top-color: #e8440a; } .w2 { border-top-color: #2196f3; } .w3 { border-top-color: #00bcd4; }
+.ci { width: 54px; height: 54px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
+.w1 .ci { background: #fff4ee; } .w2 .ci { background: #e8f4fd; } .w3 .ci { background: #e0f7fa; }
+.card h3 { font-size: 21px; font-weight: 800; color: #1a3a5c; margin-bottom: 8px; }
+.card p { font-size: 13px; color: #666; line-height: 1.65; margin-bottom: 14px; }
+.cl { list-style: none; margin-bottom: 18px; }
+.cl li { font-size: 13px; color: #555; padding: 3px 0 3px 18px; position: relative; }
+.cl li::before { content: "✓"; position: absolute; left: 0; color: #e8440a; font-weight: 800; }
+.clink { color: #e8440a; font-size: 13px; font-weight: 700; text-decoration: none; }
+.clink:hover { text-decoration: underline; }
+
+/* ÜBER UNS */
+.ueber { background: #fff; }
+.row { display: flex; gap: 52px; align-items: center; flex-wrap: wrap; }
+.left { flex: 1; min-width: 260px; }
+.left .ssub { margin-bottom: 24px; }
+.team { display: flex; gap: 14px; margin-top: 4px; flex-wrap: wrap; }
+.member { text-align: center; }
+.av { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.18); }
+.mname { font-size: 11px; color: #888; margin-top: 4px; }
+.badge-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.mbadge { background: #f0f5fb; border: 1.5px solid #d8e4f0; color: #1a3a5c; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.right { flex: 1; min-width: 260px; background: linear-gradient(135deg,#1a3a5c,#1e5799); border-radius: 20px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; gap: 14px; box-shadow: 0 8px 30px rgba(26,58,92,.25); }
+.right .icon { font-size: 56px; }
+.right .rlabel { font-size: 15px; font-weight: 600; opacity: .8; }
+
+/* REFERENZEN */
+.refs { background: #f4f7fb; }
+.rh { text-align: center; margin-bottom: 34px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.rcard { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+.rimg { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 44px; }
+.i1 { background: linear-gradient(135deg,#ffecd2,#fcb69f); }
+.i2 { background: linear-gradient(135deg,#fff1a8,#f8c400); }
+.i3 { background: linear-gradient(135deg,#b2fefa,#a8edea); }
+.i4 { background: linear-gradient(135deg,#c8f6c8,#81c784); }
+.i5 { background: linear-gradient(135deg,#ffe0b2,#ffb74d); }
+.i6 { background: linear-gradient(135deg,#e1bee7,#ba68c8); }
+.rbody { padding: 14px 16px; }
+.rtag { font-size: 10px; font-weight: 800; text-transform: uppercase; color: #e8440a; letter-spacing: 1px; margin-bottom: 4px; }
+.rbody h4 { font-size: 14px; font-weight: 800; color: #1a3a5c; margin-bottom: 3px; }
+.rbody p { font-size: 12px; color: #777; }
+
+/* TESTIMONIALS */
+.testi { background: #1a3a5c; }
+.th { text-align: center; margin-bottom: 38px; }
+.th .stag { color: #f5a623; }
+.th .stitle { color: #fff; }
+.th .ssub { color: rgba(255,255,255,.6); margin: 0 auto; }
+.tcards { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.tcard { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.13); border-radius: 16px; padding: 26px; flex: 1; min-width: 220px; max-width: 310px; }
+.gtag { display: inline-block; background: rgba(255,255,255,.08); color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.1); padding: 3px 10px; border-radius: 12px; font-size: 10px; margin-bottom: 8px; }
+.stars { color: #f5a623; font-size: 17px; letter-spacing: 2px; margin-bottom: 12px; }
+.quote { color: rgba(255,255,255,.88); font-size: 13.5px; line-height: 1.75; font-style: italic; margin-bottom: 18px; }
+.author { display: flex; align-items: center; gap: 10px; }
+.tav { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg,#e8440a,#f5a623); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0; }
+.aname { color: #fff; font-size: 13px; font-weight: 700; }
+.aloc { color: rgba(255,255,255,.45); font-size: 11px; margin-top: 1px; }
+
+/* EINZUGSGEBIET */
+.einzug { background: #fff; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.gt { background: #f0f5fb; border: 1.5px solid #d8e4f0; color: #1a3a5c; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.mapbox { flex: 1; min-width: 260px; height: 280px; background: linear-gradient(135deg,#dff0fa,#b3d9f5); border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 2px dashed #8ec5e6; box-shadow: 0 6px 22px rgba(33,150,243,.12); }
+.mapbox .micon { font-size: 54px; }
+.mapbox .mlabel { font-size: 13px; font-weight: 600; color: #1a3a5c; opacity: .7; }
+.mapbox .msub { font-size: 11px; color: #5599bb; }
+
+/* KONTAKT CTA */
+.cta { background: linear-gradient(130deg,#e8440a,#c73206); padding: 68px 52px; text-align: center; }
+.cta h2 { font-size: 38px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+.cta p { font-size: 16px; color: rgba(255,255,255,.84); line-height: 1.75; max-width: 520px; margin: 0 auto 30px; }
+.kbtns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.kbp { background: #fff; color: #e8440a; padding: 14px 30px; border-radius: 8px; font-size: 15px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,.15); }
+.kbs { background: transparent; color: #fff; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; border: 2px solid rgba(255,255,255,.4); }
+.info { display: flex; justify-content: center; gap: 36px; margin-top: 28px; flex-wrap: wrap; }
+.ii { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.88); font-size: 13px; }
+
+/* FOOTER */
+footer { background: #0c2240; padding: 40px 52px 22px; }
+.frow { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 28px; }
+.fbrand .fn { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 5px; }
+.fbrand .fs { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.7; }
+.fcols { display: flex; gap: 48px; flex-wrap: wrap; }
+.fcol h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #f5a623; margin-bottom: 10px; }
+.fcol a { display: block; color: rgba(255,255,255,.55); text-decoration: none; font-size: 12.5px; margin-bottom: 6px; transition: color .2s; }
+.fcol a:hover { color: #fff; }
+.fbot { border-top: 1px solid rgba(255,255,255,.07); margin-top: 24px; padding-top: 18px; text-align: center; font-size: 11px; color: rgba(255,255,255,.3); }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a class="nlo" href="#">
+    <div class="nli">🔥</div>
+    <div><div class="nlt">Mannhart</div><div class="nls">Gebäudetechnik AG</div></div>
+  </a>
+  <ul class="nl">
+    <li><a href="#leistungen">Wärme</a></li>
+    <li><a href="#leistungen">Wasser</a></li>
+    <li><a href="#leistungen">Luft</a></li>
+    <li><a href="#referenzen">Referenzen</a></li>
+    <li><a href="#ueber">Über uns</a></li>
+  </ul>
+  <a class="nc" href="#kontakt">Offerte anfragen</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hc1"></div>
+  <div class="hc2"></div>
+  <div class="hcont">
+    <div class="hbadge">🏆 Ihr Spezialist im Zürcher Oberland</div>
+    <h1>Wärme, Wasser &amp; Luft –<br><span>Aus einer Hand.</span></h1>
+    <p class="hsub">Persönlich, flexibel und kompetent: Mannhart Gebäudetechnik plant und realisiert massgeschneiderte Heizungs-, Sanitär- und Lüftungsanlagen für Ihr Zuhause und Ihren Betrieb.</p>
+    <div class="hbtns">
+      <a class="bp" href="#kontakt">📋 Kostenlose Offerte</a>
+      <a class="bs" href="#leistungen">Leistungen entdecken →</a>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="tbar">
+  <div class="ti"><div class="tn">25+</div><div class="tl">Jahre Erfahrung</div></div>
+  <div class="ti"><div class="tn">500+</div><div class="tl">Realisierte Projekte</div></div>
+  <div class="ti"><div class="tn">3</div><div class="tl">Fachbereiche</div></div>
+  <div class="ti"><div class="tn">⭐ 5.0</div><div class="tl">Google Bewertung</div></div>
+  <div class="ti"><div class="tn">13</div><div class="tl">Gemeinden</div></div>
+</div>
+
+<!-- LEISTUNGEN -->
+<section class="leis" id="leistungen">
+  <div class="lh">
+    <div class="stag">Unsere Leistungen</div>
+    <h2 class="stitle">Alles rund um Ihre Gebäudetechnik</h2>
+    <p class="ssub">Von der Planung bis zur Inbetriebnahme – wir begleiten Sie kompetent und verantwortungsbewusst durch jedes Projekt.</p>
+  </div>
+  <div class="cards">
+    <div class="card w1">
+      <div class="ci">🔥</div>
+      <h3>Wärme</h3>
+      <p>Effiziente und nachhaltige Heizsysteme – massgeschneidert für Ihr Gebäude.</p>
+      <ul class="cl">
+        <li>Wärmepumpen</li>
+        <li>Solaranlagen</li>
+        <li>Holz- &amp; Ölheizungen</li>
+        <li>Fernwärme</li>
+        <li>Heizungssanierungen</li>
+      </ul>
+      <a class="clink" href="#">Mehr erfahren →</a>
+    </div>
+    <div class="card w2">
+      <div class="ci">💧</div>
+      <h3>Wasser</h3>
+      <p>Verantwortungsvoller Umgang mit Wasser – von der Quelle bis zum Hahn.</p>
+      <ul class="cl">
+        <li>Sanitärinstallationen</li>
+        <li>Badezimmersanierungen</li>
+        <li>Enthärtungsanlagen</li>
+        <li>Wärmepumpenboiler</li>
+        <li>Neuinstallationen</li>
+      </ul>
+      <a class="clink" href="#">Mehr erfahren →</a>
+    </div>
+    <div class="card w3">
+      <div class="ci">💨</div>
+      <h3>Luft</h3>
+      <p>Gesundes Raumklima und optimale Luftqualität für Wohn- und Gewerberäume.</p>
+      <ul class="cl">
+        <li>Kontrollierte Wohnlüftung</li>
+        <li>Küchenabluft</li>
+        <li>Badbelüftung</li>
+        <li>Gewerbeabluftanlagen</li>
+        <li>Wartung &amp; Service</li>
+      </ul>
+      <a class="clink" href="#">Mehr erfahren →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ÜBER UNS -->
+<section class="ueber" id="ueber">
+  <div class="row">
+    <div class="left">
+      <div class="stag">Über uns</div>
+      <h2 class="stitle">Ihr verlässlicher Partner seit über 25 Jahren</h2>
+      <p class="ssub">Bei Mannhart Gebäudetechnik stehen Sie als Kunde im Mittelpunkt. Unser erfahrenes Team begleitet Sie von der ersten Beratung bis zum letzten Handgriff – persönlich, zuverlässig und mit echtem Fachwissen.</p>
+      <div class="team">
+        <div class="member"><div class="av" style="background:linear-gradient(135deg,#e8440a,#f5a623);">M</div><div class="mname">Michael</div></div>
+        <div class="member"><div class="av" style="background:linear-gradient(135deg,#1a3a5c,#2196f3);">S</div><div class="mname">Stefan</div></div>
+        <div class="member"><div class="av" style="background:linear-gradient(135deg,#00bcd4,#009688);">A</div><div class="mname">Andrea</div></div>
+        <div class="member"><div class="av" style="background:linear-gradient(135deg,#9c27b0,#673ab7);">T</div><div class="mname">Thomas</div></div>
+        <div class="member"><div class="av" style="background:linear-gradient(135deg,#f44336,#e91e63);">L</div><div class="mname">Lukas</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="mbadge">✅ Suissetec-Mitglied</span>
+        <span class="mbadge">🌿 Minergie-Partner</span>
+        <span class="mbadge">⭐ 5.0 Google</span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="icon">🛠️</div>
+      <div class="rlabel">Unser Team vor Ort</div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENZEN -->
+<section class="refs" id="referenzen">
+  <div class="rh">
+    <div class="stag">Referenzprojekte</div>
+    <h2 class="stitle">Unsere Arbeit spricht für sich</h2>
+    <p class="ssub" style="margin:0 auto;text-align:center;">Ausgewählte Projekte aus der Region – realisiert mit Fachkompetenz und Sorgfalt.</p>
+  </div>
+  <div class="grid">
+    <div class="rcard"><div class="rimg i1">🌡️</div><div class="rbody"><div class="rtag">Wärmepumpe</div><h4>EFH Turbenthal</h4><p>Luft/Wasser-WP, 12 kW · 2023</p></div></div>
+    <div class="rcard"><div class="rimg i2">☀️</div><div class="rbody"><div class="rtag">Solaranlage</div><h4>MFH Winterthur</h4><p>Thermische Solaranlage, 18 m² · 2023</p></div></div>
+    <div class="rcard"><div class="rimg i3">🚿</div><div class="rbody"><div class="rtag">Sanitär</div><h4>Badsanierung Wila</h4><p>Komplett inkl. Bodenheizung · 2022</p></div></div>
+    <div class="rcard"><div class="rimg i4">💨</div><div class="rbody"><div class="rtag">Lüftung</div><h4>KWL Neubau Rikon</h4><p>Kontrollierte Wohnlüftung, Minergie · 2023</p></div></div>
+    <div class="rcard"><div class="rimg i5">🪵</div><div class="rbody"><div class="rtag">Holzheizung</div><h4>Pelletheizung Zell</h4><p>20 kW mit Pufferspeicher · 2022</p></div></div>
+    <div class="rcard"><div class="rimg i6">🏢</div><div class="rbody"><div class="rtag">Gewerbe</div><h4>Abluft Kollbrunn</h4><p>Gewerbeabluftanlage Produktion · 2023</p></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="th">
+    <div class="stag">Kundenstimmen</div>
+    <h2 class="stitle">Was unsere Kunden sagen</h2>
+    <p class="ssub">Über 500 zufriedene Kunden in der Region Winterthur – lesen Sie selbst.</p>
+  </div>
+  <div class="tcards">
+    <div class="tcard">
+      <div class="gtag">🔍 Google Bewertung</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">„Top Arbeit! Die Wärmepumpe wurde sauber und termingerecht eingebaut. Das Team war sehr professionell und hat uns alles gut erklärt. Absolut empfehlenswert!"</p>
+      <div class="author"><div class="tav">R</div><div><div class="aname">R. Müller</div><div class="aloc">📍 Turbenthal</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="gtag">🔍 Google Bewertung</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">„Schnelle Reaktion, faire Preise und hervorragende Qualität. Das neue Badezimmer ist genau so geworden wie wir es uns vorgestellt haben. Danke!"</p>
+      <div class="author"><div class="tav">A</div><div><div class="aname">A. Keller</div><div class="aloc">📍 Wila</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="gtag">🔍 Google Bewertung</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">„Ich empfehle Mannhart sehr gerne weiter. Kompetente Beratung, pünktlich, sauber – der Preis hat gestimmt. Beim nächsten Projekt wieder!"</p>
+      <div class="author"><div class="tav">H</div><div><div class="aname">H. Zimmermann</div><div class="aloc">📍 Winterthur</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EINZUGSGEBIET -->
+<section class="einzug">
+  <div class="row">
+    <div class="left">
+      <div class="stag">Einzugsgebiet</div>
+      <h2 class="stitle">Wir kommen zu Ihnen –<br>in der ganzen Region</h2>
+      <p class="ssub">Unser Team ist im Zürcher Oberland und der Region Winterthur für Sie unterwegs – schnell, zuverlässig und persönlich.</p>
+      <div class="tags">
+        <span class="gt">📍 Turbenthal</span>
+        <span class="gt">📍 Winterthur</span>
+        <span class="gt">📍 Wila</span>
+        <span class="gt">📍 Wildberg</span>
+        <span class="gt">📍 Zell</span>
+        <span class="gt">📍 Rikon</span>
+        <span class="gt">📍 Rämismühle</span>
+        <span class="gt">📍 Russikon</span>
+        <span class="gt">📍 Weisslingen</span>
+        <span class="gt">📍 Kollbrunn</span>
+        <span class="gt">📍 Schlatt</span>
+        <span class="gt">📍 Sennhof</span>
+      </div>
+    </div>
+    <div class="mapbox">
+      <div class="micon">🗺️</div>
+      <div class="mlabel">Zürcher Oberland</div>
+      <div class="msub">Interaktive Karte (Google Maps)</div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT CTA -->
+<div class="cta" id="kontakt">
+  <h2>Bereit für Ihr nächstes Projekt?</h2>
+  <p>Kontaktieren Sie uns jetzt für eine kostenlose, unverbindliche Beratung. Wir freuen uns auf Ihre Anfrage!</p>
+  <div class="kbtns">
+    <a class="kbp" href="mailto:info@mannhart-ag.ch">📋 Offerte anfordern</a>
+    <a class="kbs" href="tel:0523852929">📞 052 385 29 29</a>
+  </div>
+  <div class="info">
+    <div class="ii">📍 Mettlenstrasse 10, 8488 Turbenthal</div>
+    <div class="ii">📧 info@mannhart-ag.ch</div>
+    <div class="ii">⏰ Mo–Fr 07:30–17:00</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="frow">
+    <div class="fbrand">
+      <div class="fn">🔥 Mannhart Gebäudetechnik AG</div>
+      <div class="fs">Mettlenstrasse 10 · 8488 Turbenthal<br>T 052 385 29 29 · info@mannhart-ag.ch</div>
+    </div>
+    <div class="fcols">
+      <div class="fcol">
+        <h4>Leistungen</h4>
+        <a href="#">Heizungstechnik</a>
+        <a href="#">Wärmepumpen</a>
+        <a href="#">Sanitär</a>
+        <a href="#">Lüftung</a>
+      </div>
+      <div class="fcol">
+        <h4>Unternehmen</h4>
+        <a href="#">Über uns</a>
+        <a href="#">Team</a>
+        <a href="#">Referenzen</a>
+        <a href="#">Sponsoring</a>
+      </div>
+      <div class="fcol">
+        <h4>Rechtliches</h4>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">Kontakt</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">© 2025 Mannhart Gebäudetechnik AG · Design-Konzept / Mockup</div>
+</footer>
+
+</body>
+</html>
