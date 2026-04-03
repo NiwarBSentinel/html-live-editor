@@ -151,6 +151,23 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
 .video-label{text-align:center;}
 .video-tag{display:inline-block;background:#00a7e1;color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:6px;}
 .video-label p{color:rgba(255,255,255,.9);font-size:.9rem;font-weight:600;}
+
+/* ── VAN 3D SHOWCASE ── */
+.van-section{background:linear-gradient(135deg,#001c30 0%,#003250 50%,#001c30 100%);padding:80px 0;overflow:hidden;position:relative;}
+.van-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,167,225,.12) 0%,transparent 70%);}
+.van-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center;position:relative;z-index:1;}
+.van-text{color:#fff;}
+.van-text .section-label{color:#00a7e1;}
+.van-text .section-title{color:#fff;margin-bottom:16px;}
+.van-text p{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.7;margin-bottom:24px;}
+.van-specs{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.van-spec{display:flex;align-items:center;gap:10px;font-size:.9rem;color:rgba(255,255,255,.75);}
+.van-spec svg{width:16px;height:16px;stroke:#00a7e1;fill:none;stroke-width:2;flex-shrink:0;}
+.van-stage{perspective:900px;display:flex;align-items:center;justify-content:center;}
+.van-3d-wrap{transform:rotateY(-18deg) rotateX(4deg);transform-style:preserve-3d;transition:transform .6s ease;filter:drop-shadow(-24px 18px 40px rgba(0,0,0,.7));}
+.van-stage:hover .van-3d-wrap{transform:rotateY(-8deg) rotateX(2deg);}
+.van-3d-wrap img{width:100%;max-width:580px;display:block;}
+.van-glow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:70%;height:60px;background:radial-gradient(ellipse,rgba(0,167,225,.25) 0%,transparent 70%);filter:blur(12px);}
 </style>
 </head>
 <body>
@@ -426,6 +443,42 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
         <p class="test-text">"Seit Jahren unser verlässlicher Partner für Heizungswartung. Immer erreichbar und kompetente Beratung bei jeder Frage."</p>
         <div class="test-author">M. Frei</div>
         <div class="test-loc">Wila</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VAN 3D SHOWCASE -->
+<section class="van-section">
+  <div class="van-inner">
+    <div class="van-text">
+      <div class="section-label">UNSER FUHRPARK</div>
+      <h2 class="section-title">Immer für<br>Sie im Einsatz.</h2>
+      <p>Mit unserem professionell ausgestatteten Servicefahrzeug sind wir täglich in der Region Turbenthal und Winterthur für Sie unterwegs – schnell, zuverlässig und gut erkennbar.</p>
+      <div class="van-specs">
+        <div class="van-spec">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Vollausgestattetes Servicefahrzeug
+        </div>
+        <div class="van-spec">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Region Turbenthal &amp; Winterthur
+        </div>
+        <div class="van-spec">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Schnelle Reaktionszeit bei Störungen
+        </div>
+        <div class="van-spec">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Heizung, Sanitär, Lüftung – alles dabei
+        </div>
+      </div>
+      <a href="tel:+41523852929" class="btn-primary">Jetzt anrufen →</a>
+    </div>
+    <div class="van-stage">
+      <div class="van-3d-wrap">
+        <img src="https://niwarbsentinel.github.io/html-live-editor/van_mannhart.png" alt="Mannhart Servicefahrzeug">
+        <div class="van-glow"></div>
       </div>
     </div>
   </div>
