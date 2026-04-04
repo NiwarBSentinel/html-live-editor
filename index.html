@@ -164,7 +164,7 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
   .nav-item{flex-direction:row;padding:12px 20px;border-radius:0;font-size:12px;gap:10px;justify-content:flex-start;border-bottom:1px solid #f0f4f8;}
   .nav-item:last-child{border-bottom:none;}
   .nav-item svg{width:18px;height:18px;}
-  .nav-hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;margin-left:auto;}
+  .nav-hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:6px;background:none;border:none;margin-left:auto;width:34px;height:34px;flex-shrink:0;}
   .nav-hamburger span{display:block;width:22px;height:2px;background:#1a2a3a;border-radius:2px;transition:all .3s;}
   .nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
   .nav-hamburger.open span:nth-child(2){opacity:0;}
@@ -281,7 +281,7 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.09 5.18 2 2 0 015.09 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
         KONTAKT
       </a>
-      <button class="nav-hamburger" id="navHamburger" aria-label="Menü" onclick="this.classList.toggle('open');document.getElementById('navItems').classList.toggle('open')">
+      <button class="nav-hamburger" id="navHamburger" aria-label="Menü" onclick="this.classList.toggle('open');document.getElementById('navItems').classList.toggle('open')" style="flex-shrink:0">
         <span></span><span></span><span></span>
       </button>
     </div>
