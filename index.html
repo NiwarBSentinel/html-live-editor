@@ -169,35 +169,6 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
   transform:perspective(800px) rotateY(4deg) rotateX(-1deg) scale(1.08) translateX(-10px);
   filter:drop-shadow(-28px 24px 50px rgba(0,28,48,.35));
 }
-
-/* ── FLAME CURSOR ── */
-* { cursor: none !important; }
-#flame-cursor {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99999;
-  width: 40px;
-  height: 44px;
-  transform: translate(-50%, -80%);
-  transition: transform .08s ease, filter .2s ease;
-  filter: drop-shadow(0 0 6px rgba(0,167,225,.8));
-}
-#flame-cursor.hovering {
-  transform: translate(-50%, -80%) scale(1.5);
-  filter: drop-shadow(0 0 14px rgba(232,68,10,1)) drop-shadow(0 0 8px rgba(255,140,0,.8));
-}
-#flame-trail span {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99998;
-  width: 10px;
-  height: 14px;
-  transform: translate(-50%,-50%);
-  opacity: 0;
-  animation: trailFade .5s ease-out forwards;
-}
-@keyframes trailFade {
-  0%   { opacity: .7; transform: translate(-50%,-50%) scale(1); }
   100% { opacity: 0;  transform: translate(-50%,-120%) scale(0.3); }
 }
 </style>
@@ -543,73 +514,5 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
     <div style="display:flex;gap:20px;"><a href="#">Impressum</a><a href="#">Datenschutz</a></div>
   </div>
 </footer>
-
-<!-- FLAME CURSOR -->
-<div id="flame-cursor">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 60" width="40" height="44">
-    <!-- Red flame - left, leans left -->
-    <path d="M22 56 C22 56 6 48 6 34 C6 24 14 18 12 8 C12 8 20 14 18 24 C22 16 20 6 26 2 C26 2 28 14 24 22 C28 16 30 10 34 8 C34 8 32 20 28 28 C30 24 34 20 36 20 C36 20 34 32 28 38 C30 34 32 30 32 30 C32 30 32 44 22 56Z"
-          fill="url(#rFlame)"/>
-    <!-- Blue flame - right, leans right -->
-    <path d="M34 56 C34 56 50 48 50 34 C50 24 42 18 44 8 C44 8 36 14 38 24 C34 16 36 6 30 2 C30 2 28 14 32 22 C28 16 26 10 22 8 C22 8 24 20 28 28 C26 24 22 20 20 20 C20 20 22 32 28 38 C26 34 24 30 24 30 C24 30 24 44 34 56Z"
-          fill="url(#bFlame)"/>
-    <defs>
-      <linearGradient id="rFlame" x1="21" y1="2" x2="21" y2="56" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stop-color="#ff4500"/>
-        <stop offset="60%" stop-color="#e8440a"/>
-        <stop offset="100%" stop-color="#cc2200"/>
-      </linearGradient>
-      <linearGradient id="bFlame" x1="35" y1="2" x2="35" y2="56" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stop-color="#00cfff"/>
-        <stop offset="60%" stop-color="#00a7e1"/>
-        <stop offset="100%" stop-color="#0066bb"/>
-      </linearGradient>
-    </defs>
-  </svg>
-</div>
-<div id="flame-trail"></div>
-<script>
-(function(){
-  const cursor = document.getElementById('flame-cursor');
-  const trail = document.getElementById('flame-trail');
-  let mx = -100, my = -100;
-  let cx = -100, cy = -100;
-  let lastTrail = 0;
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-
-    // Spawn trail particle every 60ms
-    const now = Date.now();
-    if (now - lastTrail > 60) {
-      lastTrail = now;
-      const spark = document.createElement('span');
-      spark.style.left = mx + 'px';
-      spark.style.top = my + 'px';
-      const isRed = Math.random() > 0.5;
-      spark.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 30" width="14" height="15"><path d="M11 28C11 28 3 24 3 17C3 12 7 9 6 4C6 4 10 7 9 12C11 8 10 3 13 1C13 1 14 7 12 11C14 8 15 5 17 4C17 4 16 10 14 14C15 12 17 10 18 10C18 10 17 16 14 19C15 17 16 15 16 15C16 15 16 22 11 28Z" fill="#e8440a" opacity="0.85"/><path d="M17 28C17 28 25 24 25 17C25 12 21 9 22 4C22 4 18 7 19 12C17 8 18 3 15 1C15 1 14 7 16 11C14 8 13 5 11 4C11 4 12 10 14 14C13 12 11 10 10 10C10 10 11 16 14 19C13 17 12 15 12 15C12 15 12 22 17 28Z" fill="#00a7e1" opacity="0.85"/></svg>';
-      trail.appendChild(spark);
-      setTimeout(() => spark.remove(), 500);
-    }
-  });
-
-  // Smooth follow
-  function animate() {
-    cx += (mx - cx) * 0.18;
-    cy += (my - cy) * 0.18;
-    cursor.style.left = cx + 'px';
-    cursor.style.top = cy + 'px';
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  // Hover effect on interactive elements
-  const hoverEls = document.querySelectorAll('a, button, .nav-item, .service-card, .ref-card, .play-btn');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-  });
-})();
-</script>
 </body>
 </html>
