@@ -169,6 +169,37 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
   transform:perspective(800px) rotateY(4deg) rotateX(-1deg) scale(1.08) translateX(-10px);
   filter:drop-shadow(-28px 24px 50px rgba(0,28,48,.35));
 }
+
+/* ── FLAME CURSOR ── */
+* { cursor: none !important; }
+#flame-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  width: 28px;
+  height: 36px;
+  transform: translate(-50%, -80%);
+  transition: transform .08s ease, filter .2s ease;
+  filter: drop-shadow(0 0 6px rgba(0,167,225,.8));
+}
+#flame-cursor.hovering {
+  transform: translate(-50%, -80%) scale(1.5);
+  filter: drop-shadow(0 0 14px rgba(232,68,10,1)) drop-shadow(0 0 8px rgba(255,140,0,.8));
+}
+#flame-trail span {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  width: 10px;
+  height: 14px;
+  transform: translate(-50%,-50%);
+  opacity: 0;
+  animation: trailFade .5s ease-out forwards;
+}
+@keyframes trailFade {
+  0%   { opacity: .7; transform: translate(-50%,-50%) scale(1); }
+  100% { opacity: 0;  transform: translate(-50%,-120%) scale(0.3); }
+}
 </style>
 </head>
 <body>
@@ -512,5 +543,71 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
     <div style="display:flex;gap:20px;"><a href="#">Impressum</a><a href="#">Datenschutz</a></div>
   </div>
 </footer>
+
+<!-- FLAME CURSOR -->
+<div id="flame-cursor">
+  <svg viewBox="0 0 40 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Blue flame (right) -->
+    <path d="M28 48 C28 48 38 40 36 28 C34 20 28 18 30 10 C30 10 24 16 26 26 C22 20 22 12 18 8 C18 8 14 18 18 28 C14 24 12 18 8 16 C8 16 4 26 10 34 C6 32 4 28 4 28 C4 28 2 44 16 48 C10 46 8 40 10 36 C14 44 22 48 28 48Z" fill="url(#blueFlame)" opacity="0.9"/>
+    <!-- Red flame (left/front) -->
+    <path d="M22 50 C22 50 34 44 32 30 C30 20 22 16 26 6 C26 6 16 14 20 26 C16 20 16 10 10 6 C10 6 6 18 12 28 C8 24 6 16 4 16 C4 16 0 30 8 38 C4 34 4 28 4 28 C4 28 6 46 20 50 C14 48 12 40 14 36 C18 44 16 50 22 50Z" fill="url(#redFlame)" opacity="0.85"/>
+    <defs>
+      <linearGradient id="blueFlame" x1="20" y1="8" x2="20" y2="50" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#00d4ff"/>
+        <stop offset="60%" stop-color="#00a7e1"/>
+        <stop offset="100%" stop-color="#0055aa" stop-opacity="0.6"/>
+      </linearGradient>
+      <linearGradient id="redFlame" x1="17" y1="6" x2="17" y2="50" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#ff6a00"/>
+        <stop offset="50%" stop-color="#e8440a"/>
+        <stop offset="100%" stop-color="#cc2200" stop-opacity="0.5"/>
+      </linearGradient>
+    </defs>
+  </svg>
+</div>
+<div id="flame-trail"></div>
+<script>
+(function(){
+  const cursor = document.getElementById('flame-cursor');
+  const trail = document.getElementById('flame-trail');
+  let mx = -100, my = -100;
+  let cx = -100, cy = -100;
+  let lastTrail = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+
+    // Spawn trail particle every 60ms
+    const now = Date.now();
+    if (now - lastTrail > 60) {
+      lastTrail = now;
+      const spark = document.createElement('span');
+      spark.style.left = mx + 'px';
+      spark.style.top = my + 'px';
+      const isRed = Math.random() > 0.5;
+      spark.innerHTML = '<svg viewBox="0 0 20 28" width="10" height="14"><path d="M10 26C10 26 18 20 16 12C14 6 10 4 12 0C12 0 6 4 8 10C5 6 5 2 2 0C2 0 0 6 3 12C1 10 0 6 0 6C0 6 -1 18 7 22C4 20 3 16 4 14C6 20 8 26 10 26Z" fill="' + (isRed ? '#e8440a' : '#00a7e1') + '" opacity="0.8"/></svg>';
+      trail.appendChild(spark);
+      setTimeout(() => spark.remove(), 500);
+    }
+  });
+
+  // Smooth follow
+  function animate() {
+    cx += (mx - cx) * 0.18;
+    cy += (my - cy) * 0.18;
+    cursor.style.left = cx + 'px';
+    cursor.style.top = cy + 'px';
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Hover effect on interactive elements
+  const hoverEls = document.querySelectorAll('a, button, .nav-item, .service-card, .ref-card, .play-btn');
+  hoverEls.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+  });
+})();
+</script>
 </body>
 </html>
