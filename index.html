@@ -176,8 +176,8 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
   position: fixed;
   pointer-events: none;
   z-index: 99999;
-  width: 28px;
-  height: 36px;
+  width: 40px;
+  height: 44px;
   transform: translate(-50%, -80%);
   transition: transform .08s ease, filter .2s ease;
   filter: drop-shadow(0 0 6px rgba(0,167,225,.8));
@@ -546,21 +546,23 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
 
 <!-- FLAME CURSOR -->
 <div id="flame-cursor">
-  <svg viewBox="0 0 40 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Blue flame (right) -->
-    <path d="M28 48 C28 48 38 40 36 28 C34 20 28 18 30 10 C30 10 24 16 26 26 C22 20 22 12 18 8 C18 8 14 18 18 28 C14 24 12 18 8 16 C8 16 4 26 10 34 C6 32 4 28 4 28 C4 28 2 44 16 48 C10 46 8 40 10 36 C14 44 22 48 28 48Z" fill="url(#blueFlame)" opacity="0.9"/>
-    <!-- Red flame (left/front) -->
-    <path d="M22 50 C22 50 34 44 32 30 C30 20 22 16 26 6 C26 6 16 14 20 26 C16 20 16 10 10 6 C10 6 6 18 12 28 C8 24 6 16 4 16 C4 16 0 30 8 38 C4 34 4 28 4 28 C4 28 6 46 20 50 C14 48 12 40 14 36 C18 44 16 50 22 50Z" fill="url(#redFlame)" opacity="0.85"/>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 60" width="40" height="44">
+    <!-- Red flame - left, leans left -->
+    <path d="M22 56 C22 56 6 48 6 34 C6 24 14 18 12 8 C12 8 20 14 18 24 C22 16 20 6 26 2 C26 2 28 14 24 22 C28 16 30 10 34 8 C34 8 32 20 28 28 C30 24 34 20 36 20 C36 20 34 32 28 38 C30 34 32 30 32 30 C32 30 32 44 22 56Z"
+          fill="url(#rFlame)"/>
+    <!-- Blue flame - right, leans right -->
+    <path d="M34 56 C34 56 50 48 50 34 C50 24 42 18 44 8 C44 8 36 14 38 24 C34 16 36 6 30 2 C30 2 28 14 32 22 C28 16 26 10 22 8 C22 8 24 20 28 28 C26 24 22 20 20 20 C20 20 22 32 28 38 C26 34 24 30 24 30 C24 30 24 44 34 56Z"
+          fill="url(#bFlame)"/>
     <defs>
-      <linearGradient id="blueFlame" x1="20" y1="8" x2="20" y2="50" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stop-color="#00d4ff"/>
-        <stop offset="60%" stop-color="#00a7e1"/>
-        <stop offset="100%" stop-color="#0055aa" stop-opacity="0.6"/>
+      <linearGradient id="rFlame" x1="21" y1="2" x2="21" y2="56" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#ff4500"/>
+        <stop offset="60%" stop-color="#e8440a"/>
+        <stop offset="100%" stop-color="#cc2200"/>
       </linearGradient>
-      <linearGradient id="redFlame" x1="17" y1="6" x2="17" y2="50" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stop-color="#ff6a00"/>
-        <stop offset="50%" stop-color="#e8440a"/>
-        <stop offset="100%" stop-color="#cc2200" stop-opacity="0.5"/>
+      <linearGradient id="bFlame" x1="35" y1="2" x2="35" y2="56" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#00cfff"/>
+        <stop offset="60%" stop-color="#00a7e1"/>
+        <stop offset="100%" stop-color="#0066bb"/>
       </linearGradient>
     </defs>
   </svg>
@@ -585,7 +587,7 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
       spark.style.left = mx + 'px';
       spark.style.top = my + 'px';
       const isRed = Math.random() > 0.5;
-      spark.innerHTML = '<svg viewBox="0 0 20 28" width="10" height="14"><path d="M10 26C10 26 18 20 16 12C14 6 10 4 12 0C12 0 6 4 8 10C5 6 5 2 2 0C2 0 0 6 3 12C1 10 0 6 0 6C0 6 -1 18 7 22C4 20 3 16 4 14C6 20 8 26 10 26Z" fill="' + (isRed ? '#e8440a' : '#00a7e1') + '" opacity="0.8"/></svg>';
+      spark.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 30" width="14" height="15"><path d="M11 28C11 28 3 24 3 17C3 12 7 9 6 4C6 4 10 7 9 12C11 8 10 3 13 1C13 1 14 7 12 11C14 8 15 5 17 4C17 4 16 10 14 14C15 12 17 10 18 10C18 10 17 16 14 19C15 17 16 15 16 15C16 15 16 22 11 28Z" fill="#e8440a" opacity="0.85"/><path d="M17 28C17 28 25 24 25 17C25 12 21 9 22 4C22 4 18 7 19 12C17 8 18 3 15 1C15 1 14 7 16 11C14 8 13 5 11 4C11 4 12 10 14 14C13 12 11 10 10 10C10 10 11 16 14 19C13 17 12 15 12 15C12 15 12 22 17 28Z" fill="#00a7e1" opacity="0.85"/></svg>';
       trail.appendChild(spark);
       setTimeout(() => spark.remove(), 500);
     }
