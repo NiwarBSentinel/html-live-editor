@@ -131,11 +131,86 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
 .footer-bottom{max-width:1100px;margin:40px auto 0;padding:20px 20px 0;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:#4a6070;}
 .footer-bottom a{color:#4a6070;text-decoration:none;}
 .footer-bottom a:hover{color:#00a7e1;}
+
+/* ── RESPONSIVE ── */
+
+/* Tablet: 900px */
 @media(max-width:900px){
-  .hero-content{grid-template-columns:1fr;}
+  .nav-card{padding:12px 20px;gap:0;border-radius:12px;}
+  .nav-logo img{height:44px;}
+  .nav-item{padding:6px 10px;font-size:10px;gap:3px;}
+  .nav-item svg{width:17px;height:17px;}
+  .hero-content{grid-template-columns:1fr;gap:36px;padding:100px 20px 48px;}
+  .hero-left p{max-width:100%;}
+  .hero-stats{gap:16px;}
   .services-grid,.ref-grid,.test-grid{grid-template-columns:1fr 1fr;}
   .about-grid,.gebiete-grid{grid-template-columns:1fr;}
-  .footer-grid{grid-template-columns:1fr;}
+  .about-img-wrap img,.about-img-wrap{height:280px;}
+  .gebiete-img img{height:260px;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .van-breakout{width:480px;right:-40px;bottom:-20px;}
+  .van-breakout-wrap{height:260px;}
+}
+
+/* Mobile: 640px */
+@media(max-width:640px){
+  /* NAV → hamburger */
+  nav{top:10px;width:calc(100% - 24px);}
+  .nav-card{padding:10px 16px;position:relative;border-radius:12px;}
+  .nav-logo img{height:38px;}
+  .nav-items{display:none;flex-direction:column;gap:0;position:absolute;top:calc(100% + 8px);left:0;right:0;background:rgba(255,255,255,.97);border-radius:12px;box-shadow:0 8px 32px rgba(0,28,48,.15);padding:8px 0;z-index:200;}
+  .nav-items.open{display:flex;}
+  .nav-item{flex-direction:row;padding:12px 20px;border-radius:0;font-size:12px;gap:10px;justify-content:flex-start;border-bottom:1px solid #f0f4f8;}
+  .nav-item:last-child{border-bottom:none;}
+  .nav-item svg{width:18px;height:18px;}
+  .nav-hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;margin-left:auto;}
+  .nav-hamburger span{display:block;width:22px;height:2px;background:#1a2a3a;border-radius:2px;transition:all .3s;}
+  .nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+  .nav-hamburger.open span:nth-child(2){opacity:0;}
+  .nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+
+  /* HERO */
+  .hero{min-height:auto;}
+  .hero-content{padding:80px 16px 40px;gap:28px;}
+  .hero-left h1{font-size:1.9rem;}
+  .hero-eyebrow{font-size:10px;}
+  .hero-cta-row{flex-wrap:wrap;gap:12px;}
+  .hero-stats{gap:12px;}
+  .stat-num{font-size:1.4rem;}
+
+  /* FORM */
+  .hero-form-panel{padding:22px 18px;}
+  .form-row{grid-template-columns:1fr;}
+
+  /* SECTIONS */
+  section{padding:56px 0;}
+  .section-title{font-size:1.5rem;}
+  .services-grid,.ref-grid,.test-grid{grid-template-columns:1fr;}
+  .trust-inner{gap:20px;flex-direction:column;align-items:flex-start;padding:0 24px;}
+
+  /* ABOUT */
+  .about-grid{gap:32px;}
+  .video-thumb-wrap,.about-img-wrap img{height:220px;}
+
+  /* VAN */
+  .van-breakout-wrap{height:200px;overflow:hidden;}
+  .van-breakout{width:100%;max-width:100%;position:relative;bottom:auto;right:auto;transform:none;filter:drop-shadow(0 8px 20px rgba(0,28,48,.2));}
+
+  /* GEBIETE */
+  .gebiete-grid{gap:32px;}
+  .gebiete-img{display:none;}
+
+  /* FOOTER */
+  .footer-grid{grid-template-columns:1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+}
+
+/* Small mobile: 400px */
+@media(max-width:400px){
+  .hero-left h1{font-size:1.6rem;}
+  .nav-logo img{height:32px;}
+  .hero-stats{flex-direction:column;gap:10px;}
+  .stat-item{border-left:none;border-top:1px solid #00a7e1;padding-left:0;padding-top:8px;}
 }
 
 /* ── VIDEO THUMBNAIL ── */
@@ -180,7 +255,7 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
     <div class="nav-logo">
       <img src="https://www.mannhart-ag.ch/resources/Public/Images/logo_mannhart.svg" alt="Mannhart Gebäudetechnik AG">
     </div>
-    <div class="nav-items">
+    <div class="nav-items" id="navItems">
       <a href="#waerme" class="nav-item">
         <svg viewBox="0 0 24 24"><path d="M12 2c0 4-4 6-4 10a4 4 0 008 0c0-4-4-6-4-10z"/><path d="M9 17.5A2.5 2.5 0 0012 20a2.5 2.5 0 002.5-2.5"/></svg>
         WÄRME
@@ -205,6 +280,9 @@ footer{background:#001c30;color:#8da8bc;padding:56px 0 24px;}
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.09 5.18 2 2 0 015.09 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
         KONTAKT
       </a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Menü" onclick="this.classList.toggle('open');document.getElementById('navItems').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
